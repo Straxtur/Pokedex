@@ -37,10 +37,6 @@ export default withTV({
 				normal: 400,
 				medium: 700,
 			},
-			fontSize: {
-				h1: "50px",
-				buttonText: "16px",
-			},
 		},
 	},
 	plugins: [],
