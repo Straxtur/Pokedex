@@ -1,5 +1,6 @@
 import { SearchIcon } from "@components/Icons";
 import { tvFlexContainer } from "@styles/variants/container";
+import { motion as m } from "framer-motion";
 
 const Search = () => {
 	return (
@@ -13,7 +14,14 @@ const Search = () => {
 				class: "p-3",
 			})}
 		>
-			<div
+			<m.div
+				initial={{ y: 100, opacity: 0 }}
+				animate={{ y: 0, opacity: 1 }}
+				transition={{
+					duration: 2,
+					bounce: 0.2,
+					type: "spring",
+				}}
 				className={tvFlexContainer({
 					direction: "row",
 					heigth: "fit",
@@ -36,7 +44,7 @@ const Search = () => {
 					className="w-full p-3 text-lg font-light text-white bg-transparent h-fit focus:outline-none font-pokemon"
 					aria-placeholder="Pikachu"
 				/>
-			</div>
+			</m.div>
 		</section>
 	);
 };

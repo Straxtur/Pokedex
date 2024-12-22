@@ -1,6 +1,7 @@
 import Button from "@components/Button";
 import { tvFlexContainer } from "@styles/variants/container";
 import { tvText } from "@styles/variants/text";
+import { motion as m } from "framer-motion";
 
 const Hero = () => {
 	return (
@@ -14,7 +15,14 @@ const Hero = () => {
 				class: "lg:flex-row gap-4",
 			})}
 		>
-			<section
+			<m.section
+				initial={{ x: -100, opacity: 0 }}
+				animate={{ x: 0, opacity: 1 }}
+				transition={{
+					duration: 2,
+					bounce: 0.2,
+					type: "spring",
+				}}
 				className={tvFlexContainer({
 					direction: "column",
 					width: "fit",
@@ -66,15 +74,24 @@ const Hero = () => {
 						Team Builder
 					</Button>
 				</nav>
-			</section>
+			</m.section>
 
-			<figure className="order-1 h-full w-fit lg:order-2">
+			<m.figure
+				initial={{ x: 100, opacity: 0 }}
+				animate={{ x: 0, opacity: 1 }}
+				transition={{
+					duration: 2,
+					bounce: 0.2,
+					type: "spring",
+				}}
+				className="order-1 h-full w-fit lg:order-2"
+			>
 				<img
 					className="filter saturate-200 w-80"
 					src="greninja-hero.png"
 					alt="greninja"
 				/>
-			</figure>
+			</m.figure>
 		</header>
 	);
 };

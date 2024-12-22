@@ -3,7 +3,7 @@ import Hero from "@components/home/Hero";
 import Search from "@components/home/Search";
 import { tvFlexContainer } from "@styles/variants/container";
 
-function App() {
+const App = () => {
 	return (
 		<main
 			className={tvFlexContainer({
@@ -22,6 +22,6 @@ function App() {
 			<FooterWave />
 		</main>
 	);
-}
+};
 
 export default App;
