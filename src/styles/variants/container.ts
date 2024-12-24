@@ -7,7 +7,7 @@ export const tvFlexContainer = tv({
 			fill: "w-full",
 			fit: "w-fit",
 		},
-		heigth: {
+		height: {
 			fill: "h-full",
 			fit: "h-fit",
 		},

@@ -9,7 +9,7 @@ const Hero = () => {
 			className={tvFlexContainer({
 				direction: "column",
 				width: "fill",
-				heigth: "fit",
+				height: "fit",
 				justify: "center",
 				align: "center",
 				class: "lg:flex-row gap-4",
@@ -26,7 +26,7 @@ const Hero = () => {
 				className={tvFlexContainer({
 					direction: "column",
 					width: "fit",
-					heigth: "fit",
+					height: "fit",
 					justify: "start",
 					align: "center",
 					class:
@@ -53,21 +53,21 @@ const Hero = () => {
 						class: "h-fit",
 					})}
 				>
-					Explora, Combate y conviertete en un maestro Pokemon
+					Explora, Combate y conviértete en un maestro Pokemon
 				</p>
 
 				<nav
 					className={tvFlexContainer({
 						direction: "row",
 						width: "fit",
-						heigth: "fit",
+						height: "fit",
 						justify: "center",
 						align: "center",
 						class: "gap-4 p-5",
 					})}
 				>
 					<Button textColor="white" bg={"bg-secondary-200"}>
-						Pokedex
+						Pokédex
 					</Button>
 
 					<Button colorBorder="white" textColor="white">

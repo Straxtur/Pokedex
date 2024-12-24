@@ -16,5 +16,12 @@
   },
   "[typescriptreact]": {
       "editor.defaultFormatter": "biomejs.biome"
-  }
+},
+"cSpell.words": [
+    "greninja",
+    "Pikachu",
+    "pokeball",
+    "Pokédex",
+    "pokemon"
+]
 }

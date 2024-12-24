@@ -8,7 +8,7 @@ const Search = () => {
 			className={tvFlexContainer({
 				direction: "row",
 				width: "fill",
-				heigth: "fit",
+				height: "fit",
 				justify: "center",
 				align: "center",
 				class: "p-3",
@@ -24,7 +24,7 @@ const Search = () => {
 				}}
 				className={tvFlexContainer({
 					direction: "row",
-					heigth: "fit",
+					height: "fit",
 					justify: "center",
 					align: "center",
 					class:

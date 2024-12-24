@@ -9,7 +9,7 @@ const Home = () => {
 			className={tvFlexContainer({
 				direction: "column",
 				width: "fill",
-				heigth: "fit",
+				height: "fit",
 				justify: "center",
 				align: "center",
 				class: "pt-5 min-w-[320px]",
