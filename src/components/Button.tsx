@@ -1,5 +1,5 @@
 import { tvButton } from "@styles/variants/buttons";
-import { motion as m } from "framer-motion";
+import { m } from "motion/react";
 
 interface ButtonProps {
 	type?: "button" | "submit" | "reset";

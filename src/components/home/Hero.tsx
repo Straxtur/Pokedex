@@ -1,7 +1,7 @@
 import Button from "@components/Button";
 import { tvFlexContainer } from "@styles/variants/container";
 import { tvText } from "@styles/variants/text";
-import { motion as m } from "framer-motion";
+import { m } from "motion/react";
 
 const Hero = () => {
 	return (

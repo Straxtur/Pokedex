@@ -1,6 +1,6 @@
 import { SearchIcon } from "@components/Icons";
 import { tvFlexContainer } from "@styles/variants/container";
-import { motion as m } from "framer-motion";
+import { m } from "motion/react";
 
 const Search = () => {
 	return (
