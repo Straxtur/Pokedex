@@ -3,7 +3,7 @@ import Hero from "@components/home/Hero";
 import Search from "@components/home/Search";
 import { tvFlexContainer } from "@styles/variants/container";
 
-const App = () => {
+const Home = () => {
 	return (
 		<main
 			className={tvFlexContainer({
@@ -24,4 +24,4 @@ const App = () => {
 	);
 };
 
-export default App;
+export default Home;
