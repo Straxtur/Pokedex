@@ -1,6 +1,7 @@
-import Button from "@components/Button";
+import LinkButton from "@components/LinkButton";
 import { tvFlexContainer } from "@styles/variants/container";
 import { tvText } from "@styles/variants/text";
+
 import { m } from "motion/react";
 
 const Hero = () => {
@@ -66,13 +67,21 @@ const Hero = () => {
 						class: "gap-4 p-5",
 					})}
 				>
-					<Button textColor="white" bg={"bg-secondary-200"}>
+					<LinkButton
+						route="/pokemon"
+						textColor="white"
+						bg={"bg-secondary-200"}
+					>
 						Pokédex
-					</Button>
+					</LinkButton>
 
-					<Button colorBorder="white" textColor="white">
+					<LinkButton
+						route="/pokemon/builder"
+						colorBorder="white"
+						textColor="white"
+					>
 						Team Builder
-					</Button>
+					</LinkButton>
 				</nav>
 			</m.section>
 

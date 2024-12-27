@@ -1,22 +1,25 @@
 import { tvButton } from "@styles/variants/buttons";
+import { Link } from "@tanstack/react-router";
 import { m } from "motion/react";
-interface ButtonProps {
-	type?: "button" | "submit" | "reset";
+
+interface LinkButtonProps {
 	children: string;
 	textColor: "white" | "black";
 	colorBorder?: "white";
 	bg?: string;
+	route: string;
 }
 
-const Button: React.FC<ButtonProps> = ({
-	type = "button",
+const LinkButton: React.FC<LinkButtonProps> = ({
 	children,
 	textColor,
 	colorBorder,
 	bg = "transparent",
+	route,
 }) => {
 	return (
-		<m.button
+		<m.div
+			className="h-fit w-fit"
 			whileHover={{
 				scale: 1.1,
 				transition: {
@@ -33,16 +36,19 @@ const Button: React.FC<ButtonProps> = ({
 					type: "spring",
 				},
 			}}
-			className={tvButton({
-				class: `${bg}`,
-				textColor: textColor,
-				border: colorBorder,
-			})}
-			type={type}
 		>
-			{children}
-		</m.button>
+			<Link
+				to={route}
+				className={tvButton({
+					class: `${bg}`,
+					textColor: textColor,
+					border: colorBorder,
+				})}
+			>
+				{children}
+			</Link>
+		</m.div>
 	);
 };
 
-export default Button;
+export default LinkButton;
