@@ -7,12 +7,12 @@ const Hero = () => {
 	return (
 		<header
 			className={tvFlexContainer({
-				direction: "column",
+				direction: { initial: "column", lg: "row" },
 				width: "fill",
 				height: "fit",
 				justify: "center",
 				align: "center",
-				class: "lg:flex-row gap-4",
+				class: "gap-4",
 			})}
 		>
 			<m.section
@@ -28,9 +28,9 @@ const Hero = () => {
 					width: "fit",
 					height: "fit",
 					justify: "start",
-					align: "center",
-					class:
-						"order-2 gap-4 p-3 lg:items-start lg:order-1 lg:w-fit lg:h-fit",
+					align: { initial: "center", lg: "start" },
+					order: { initial: "o2", lg: "o1" },
+					class: "gap-4 p-3",
 				})}
 			>
 				<h1
@@ -84,10 +84,10 @@ const Hero = () => {
 					bounce: 0.2,
 					type: "spring",
 				}}
-				className="order-1 h-full w-fit lg:order-2"
+				className="order-1 lg:order-2"
 			>
 				<img
-					className="filter saturate-200 w-80"
+					className="pt-20 lg:p-0 filter saturate-200 w-80"
 					src="greninja-hero.png"
 					alt="greninja"
 				/>

@@ -12,12 +12,26 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
+import { Route as PokemonIndexImport } from './routes/pokemon/index'
+import { Route as PokemonBuilderImport } from './routes/pokemon/builder'
 
 // Create/Update Routes
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PokemonIndexRoute = PokemonIndexImport.update({
+  id: '/pokemon/',
+  path: '/pokemon/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PokemonBuilderRoute = PokemonBuilderImport.update({
+  id: '/pokemon/builder',
+  path: '/pokemon/builder',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -32,6 +46,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/pokemon/builder': {
+      id: '/pokemon/builder'
+      path: '/pokemon/builder'
+      fullPath: '/pokemon/builder'
+      preLoaderRoute: typeof PokemonBuilderImport
+      parentRoute: typeof rootRoute
+    }
+    '/pokemon/': {
+      id: '/pokemon/'
+      path: '/pokemon'
+      fullPath: '/pokemon'
+      preLoaderRoute: typeof PokemonIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -39,32 +67,42 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/pokemon/builder': typeof PokemonBuilderRoute
+  '/pokemon': typeof PokemonIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/pokemon/builder': typeof PokemonBuilderRoute
+  '/pokemon': typeof PokemonIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/pokemon/builder': typeof PokemonBuilderRoute
+  '/pokemon/': typeof PokemonIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/pokemon/builder' | '/pokemon'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/pokemon/builder' | '/pokemon'
+  id: '__root__' | '/' | '/pokemon/builder' | '/pokemon/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PokemonBuilderRoute: typeof PokemonBuilderRoute
+  PokemonIndexRoute: typeof PokemonIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PokemonBuilderRoute: PokemonBuilderRoute,
+  PokemonIndexRoute: PokemonIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -77,11 +115,19 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/"
+        "/",
+        "/pokemon/builder",
+        "/pokemon/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/pokemon/builder": {
+      "filePath": "pokemon/builder.tsx"
+    },
+    "/pokemon/": {
+      "filePath": "pokemon/index.tsx"
     }
   }
 }

@@ -2,10 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-body, html{
+body, html, #root{
+    
     height: 100%;
     width: 100%;
-    overflow: hidden;
+    overflow-x: hidden !important;
+    
 }
 body {
     --var-top-gradient: #060E20;

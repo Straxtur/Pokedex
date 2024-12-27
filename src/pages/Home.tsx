@@ -1,6 +1,6 @@
+import Search from "@components/Search";
 import FooterWave from "@components/home/FooterWave";
 import Hero from "@components/home/Hero";
-import Search from "@components/home/Search";
 import { tvFlexContainer } from "@styles/variants/container";
 
 const Home = () => {
@@ -9,7 +9,7 @@ const Home = () => {
 			className={tvFlexContainer({
 				direction: "column",
 				width: "fill",
-				height: "fit",
+				height: "fill",
 				justify: "center",
 				align: "center",
 				class: "pt-5 min-w-[320px]",
@@ -17,7 +17,7 @@ const Home = () => {
 		>
 			<Hero />
 
-			<Search />
+			<Search bg="bg-secondary-200" />
 
 			<FooterWave />
 		</main>

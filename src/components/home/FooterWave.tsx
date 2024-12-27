@@ -2,7 +2,7 @@ import { m } from "motion/react";
 
 const FooterWave = () => {
 	return (
-		<footer className="w-full h-fit">
+		<footer className="relative w-full h-full mt-5 overflow-hidden">
 			<m.svg
 				initial={{ y: 0 }}
 				animate={{ y: [0, 15, 0] }}
@@ -12,9 +12,10 @@ const FooterWave = () => {
 					repeatType: "loop",
 					ease: "easeInOut",
 				}}
-				className="absolute bottom-0 w-full"
+				className="absolute bottom-0 w-full h-fit mac"
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 1440 320"
+				preserveAspectRatio="none"
 			>
 				<path
 					fill="#14142B"

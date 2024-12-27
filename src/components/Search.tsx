@@ -2,7 +2,11 @@ import { SearchIcon } from "@components/Icons";
 import { tvFlexContainer } from "@styles/variants/container";
 import { m } from "motion/react";
 
-const Search = () => {
+interface SearchProps {
+	bg: "bg-secondary-200" | "bg-secondary-100";
+}
+
+const Search: React.FC<SearchProps> = ({ bg }) => {
 	return (
 		<section
 			className={tvFlexContainer({
@@ -27,8 +31,7 @@ const Search = () => {
 					height: "fit",
 					justify: "center",
 					align: "center",
-					class:
-						"gap-3 px-6  bg-secondary-200 w-[755px] min-w-[293px]  rounded-3xl",
+					class: `gap-3 px-6 w-[755px] min-w-[293px]  rounded-3xl ${bg}`,
 				})}
 			>
 				<button
