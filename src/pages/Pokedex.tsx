@@ -28,9 +28,9 @@ const Pokedex = () => {
 				Búsqueda Pokemon
 			</h1>
 
-			<Search bg="bg-secondary-100" />
-
 			<TypesCarousel />
+
+			<Search bg="bg-secondary-100" />
 
 			<ListPokemon />
 		</div>

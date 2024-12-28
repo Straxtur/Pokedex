@@ -1,7 +1,6 @@
 import LinkButton from "@components/LinkButton";
 import { tvFlexContainer } from "@styles/variants/container";
 import { tvText } from "@styles/variants/text";
-
 import { m } from "motion/react";
 
 const Hero = () => {

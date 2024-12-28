@@ -1,18 +1,23 @@
 import PokemonType from "@components/PokemonType";
-import { tvFlexContainer } from "@styles/variants/container";
+import {
+	tvBackgroundPokemon,
+	tvFlexContainer,
+} from "@styles/variants/container";
 import { tvText } from "@styles/variants/text";
 
 const PokemonCard = () => {
 	return (
 		<div
-			className={tvFlexContainer({
+			className={`${tvFlexContainer({
 				direction: "column",
 				align: "center",
 				justify: "center",
 				width: "fit",
 				height: "fit",
-				class: "bg-gray-400 gap-4 rounded-3xl",
-			})}
+				class: "gap-4 rounded-3xl ",
+			})} ${tvBackgroundPokemon({
+				type: "ghost",
+			})}`}
 		>
 			<figure className="w-full">
 				<img
