@@ -1,3 +1,4 @@
+import { usePokemonQuery } from "@/api/queries/usePokemonQuery";
 import Search from "@components/Search";
 import ListPokemon from "@components/pokedex/ListPokemon";
 import TypesCarousel from "@components/pokedex/TypesCarousel";
@@ -5,6 +6,8 @@ import { tvFlexContainer } from "@styles/variants/container";
 import { tvText } from "@styles/variants/text";
 
 const Pokedex = () => {
+	const { pokemonQuery, pokemonDetailsQueries } = usePokemonQuery();
+
 	return (
 		<div
 			className={tvFlexContainer({

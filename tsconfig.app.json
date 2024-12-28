@@ -11,6 +11,7 @@
       "@pages/*": ["./src/pages/*"],
       "@styles/*": ["./src/styles/*"],
       "@assets/*": ["./src/assets/*"],
+      "@api/*": ["./src/api/*"],
       "@/*": ["./src/*"],
     },
 
