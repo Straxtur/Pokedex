@@ -9,3 +9,8 @@ interface PokemonPagination {
 	name: string;
 	url: string;
 }
+
+export interface PokemonType {
+	pokemon: PokemonPagination;
+	slot: number;
+}

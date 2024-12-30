@@ -1,12 +1,19 @@
-import { usePokemonQuery } from "@api/queries/usePokemonQuery";
+import type { Types } from "@/types/pokemonTypes";
+import {
+	usePokemonFilterQuery,
+	usePokemonQuery,
+} from "@api/queries/usePokemonQuery";
 import Button from "@components/Button";
 import Search from "@components/Search";
 import PokemonCard from "@components/pokedex/PokemonCard";
 import TypesCarousel from "@components/pokedex/TypesCarousel";
 import { tvFlexContainer } from "@styles/variants/container";
 import { tvText } from "@styles/variants/text";
+import { useState } from "react";
 
 const Pokedex = () => {
+	const [type, setType] = useState<Types>("all");
+
 	const {
 		pokemonQuery: {
 			fetchNextPage,
@@ -16,7 +23,7 @@ const Pokedex = () => {
 			hasNextPage,
 		},
 		pokemonDetailsQueries,
-	} = usePokemonQuery();
+	} = type === "all" ? usePokemonQuery() : usePokemonFilterQuery(type);
 
 	if (isError) {
 		throw new Error(error.message);
@@ -45,7 +52,7 @@ const Pokedex = () => {
 				Búsqueda Pokemon
 			</h1>
 
-			<TypesCarousel />
+			<TypesCarousel setType={setType} />
 
 			<Search bg="bg-secondary-100" />
 

@@ -1,6 +1,6 @@
 import type { AllPokemonData } from "@/types/pokemonFetch";
 export const FirstPageURL =
-	" https://pokeapi.co/api/v2/pokemon?offset=0&limit=20" as string;
+	"https://pokeapi.co/api/v2/pokemon?offset=0&limit=20" as string;
 
 export const getAllPokemon = async (
 	url = FirstPageURL,
@@ -19,4 +19,13 @@ export const getPokemonDetails = async (url: string) => {
 		throw new Error("Error durante la petición");
 	}
 	return response.json();
+};
+
+export const getFilterPokemon = async (type: string) => {
+	const response = await fetch(`https://pokeapi.co/api/v2/type/${type}`);
+	if (!response.ok) {
+		throw new Error("Error durante la petición");
+	}
+
+	return await response.json();
 };

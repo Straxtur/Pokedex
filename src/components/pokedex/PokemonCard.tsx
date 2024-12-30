@@ -25,23 +25,28 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
 				type: pokemon.types[0].type.name,
 			})}`}
 		>
-			<figure className="w-full">
+			<figure className="w-fit">
 				<img
 					className="max-w-64 filter saturate-200"
 					src={pokemon.sprites.other?.["official-artwork"].front_default}
 					alt={pokemon.name}
 				/>
 			</figure>
-			<h5
+			<p
 				className={tvText({
 					color: "white",
 					align: "center",
 					weight: "normal",
 					class: "text-3xl uppercase",
 				})}
+				style={{
+					wordWrap: "break-word",
+					overflowWrap: "break-word",
+					maxWidth: "255px",
+				}}
 			>
 				{pokemon.name}
-			</h5>
+			</p>
 			<div
 				className={tvFlexContainer({
 					direction: "row",

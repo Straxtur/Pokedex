@@ -1,4 +1,5 @@
 export type Types =
+	| "all"
 	| "bug"
 	| "dark"
 	| "dragon"
