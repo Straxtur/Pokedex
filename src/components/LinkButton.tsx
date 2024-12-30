@@ -43,6 +43,7 @@ const LinkButton: React.FC<LinkButtonProps> = ({
 					class: `${bg}`,
 					textColor: textColor,
 					border: colorBorder,
+					padding: "default",
 				})}
 			>
 				{children}

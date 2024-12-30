@@ -58,6 +58,7 @@ export const tvBackgroundPokemon = tv({
 			bug: "from-[#060E20] to-bug",
 			ghost: "from-[#060E20] to-ghost",
 			steel: "from-[#060E20] to-steel",
+			flying: "from-[#060E20] to-flying",
 		},
 	},
 });

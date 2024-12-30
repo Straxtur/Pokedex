@@ -1,3 +1,5 @@
+import type { PokemonResponse } from "@/types/pokemonDetails";
+import { formatPokemonId } from "@/utils/formatter";
 import PokemonType from "@components/PokemonType";
 import {
 	tvBackgroundPokemon,
@@ -5,7 +7,11 @@ import {
 } from "@styles/variants/container";
 import { tvText } from "@styles/variants/text";
 
-const PokemonCard = () => {
+interface PokemonCardProps {
+	pokemon: PokemonResponse;
+}
+
+const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
 	return (
 		<div
 			className={`${tvFlexContainer({
@@ -14,16 +20,16 @@ const PokemonCard = () => {
 				justify: "center",
 				width: "fit",
 				height: "fit",
-				class: "gap-4 rounded-3xl ",
+				class: "gap-4 rounded-3xl",
 			})} ${tvBackgroundPokemon({
-				type: "ghost",
+				type: pokemon.types[0].type.name,
 			})}`}
 		>
 			<figure className="w-full">
 				<img
 					className="max-w-64 filter saturate-200"
-					src="greninja-hero.png"
-					alt="greninja"
+					src={pokemon.sprites.other?.["official-artwork"].front_default}
+					alt={pokemon.name}
 				/>
 			</figure>
 			<h5
@@ -31,10 +37,10 @@ const PokemonCard = () => {
 					color: "white",
 					align: "center",
 					weight: "normal",
-					class: "text-3xl",
+					class: "text-3xl uppercase",
 				})}
 			>
-				Pikachu
+				{pokemon.name}
 			</h5>
 			<div
 				className={tvFlexContainer({
@@ -44,8 +50,8 @@ const PokemonCard = () => {
 					class: "gap-2",
 				})}
 			>
-				<PokemonType type="water" />
-				<PokemonType type="dark" />
+				<PokemonType type={pokemon.types[0].type.name} />
+				{pokemon.types[1] && <PokemonType type={pokemon.types[1].type.name} />}
 			</div>
 			<h5
 				className={tvText({
@@ -55,7 +61,7 @@ const PokemonCard = () => {
 					class: "text-2xl",
 				})}
 			>
-				#009
+				{formatPokemonId(pokemon.id)}
 			</h5>
 		</div>
 	);
