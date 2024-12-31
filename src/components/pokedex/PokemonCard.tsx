@@ -28,7 +28,10 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
 			<figure className="w-fit">
 				<img
 					className="max-w-64 filter saturate-200"
-					src={pokemon.sprites.other?.["official-artwork"].front_default}
+					src={
+						pokemon.sprites.other?.["official-artwork"].front_default ??
+						pokemon.sprites.other?.home.front_default
+					}
 					alt={pokemon.name}
 				/>
 			</figure>
