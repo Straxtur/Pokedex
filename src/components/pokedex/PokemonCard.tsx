@@ -6,6 +6,7 @@ import {
 	tvFlexContainer,
 } from "@styles/variants/container";
 import { tvText } from "@styles/variants/text";
+import { m } from "motion/react";
 
 interface PokemonCardProps {
 	pokemon: PokemonResponse;
@@ -13,7 +14,24 @@ interface PokemonCardProps {
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
 	return (
-		<div
+		<m.div
+			initial={{ opacity: 0, scale: 0.8 }}
+			whileInView={{ opacity: 1, scale: 1 }}
+			viewport={{ amount: 0.4 }}
+			transition={{
+				duration: 0.45,
+				bounce: 0.25,
+				type: "spring",
+			}}
+			whileHover={{
+				scale: 1.1,
+				cursor: "pointer",
+				transition: {
+					duration: 0.45,
+					bounce: 0.25,
+					type: "spring",
+				},
+			}}
 			className={`${tvFlexContainer({
 				direction: "column",
 				align: "center",
@@ -71,7 +89,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
 			>
 				{formatPokemonId(pokemon.id)}
 			</h5>
-		</div>
+		</m.div>
 	);
 };
 
