@@ -6,13 +6,15 @@ import {
 import Button from "@components/Button";
 import Search from "@components/Search";
 import PokemonCard from "@components/pokedex/PokemonCard";
+import ScrollUpButton from "@components/pokedex/ScrollUpButton";
 import TypesCarousel from "@components/pokedex/TypesCarousel";
 import { tvFlexContainer } from "@styles/variants/container";
 import { tvText } from "@styles/variants/text";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const Pokedex = () => {
 	const [type, setType] = useState<Types>("all");
+	const sectionRef = useRef<HTMLDivElement>(null);
 
 	const {
 		pokemonQuery: {
@@ -28,6 +30,13 @@ const Pokedex = () => {
 	if (isError) {
 		throw new Error(error.message);
 	}
+
+	const handleScrollToSection = () => {
+		sectionRef.current?.scrollIntoView({
+			behavior: "smooth", // Para un scroll suave
+			block: "start", // Alinear con la parte superior de la sección
+		});
+	};
 
 	return (
 		<div
@@ -58,13 +67,14 @@ const Pokedex = () => {
 
 			{/* Render Pokemon cards */}
 			<section
+				ref={sectionRef}
 				className={tvFlexContainer({
 					direction: "row",
 					align: "center",
 					justify: "center",
 					width: "fill",
 					height: "fit",
-					class: "flex-wrap gap-5 p-9 max-w-[1430px] ",
+					class: "flex-wrap gap-5 p-9 max-w-[1430px] relative ",
 				})}
 			>
 				{pokemonDetailsQueries.map(
@@ -73,6 +83,7 @@ const Pokedex = () => {
 							<PokemonCard key={query.data.id} pokemon={query.data} />
 						),
 				)}
+				<ScrollUpButton scrollUp={handleScrollToSection} />
 			</section>
 
 			{hasNextPage && (
