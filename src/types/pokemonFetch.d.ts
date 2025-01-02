@@ -3,6 +3,7 @@ export interface AllPokemonData {
 	next: string | null;
 	previous: string | null;
 	results: PokemonPagination[];
+	page: number;
 }
 
 interface PokemonPagination {

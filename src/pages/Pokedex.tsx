@@ -1,11 +1,6 @@
 import type { Types } from "@/types/pokemonTypes";
-import {
-	usePokemonFilterQuery,
-	usePokemonQuery,
-} from "@api/queries/usePokemonQuery";
-import Button from "@components/Button";
+import { usePokemonQuery } from "@api/queries/usePokemonQuery";
 import Search from "@components/Search";
-import PokemonCard from "@components/pokedex/PokemonCard";
 import ScrollUpButton from "@components/pokedex/ScrollUpButton";
 import TypesCarousel from "@components/pokedex/TypesCarousel";
 import { tvFlexContainer } from "@styles/variants/container";
@@ -13,19 +8,20 @@ import { tvText } from "@styles/variants/text";
 import { useRef, useState } from "react";
 
 const Pokedex = () => {
-	const [type, setType] = useState<Types>("all");
+	const [_, setType] = useState<Types>("all");
 	const sectionRef = useRef<HTMLDivElement>(null);
+	const [currentPage, setCurrentPage] = useState(0);
 
 	const {
 		pokemonQuery: {
 			fetchNextPage,
 			isFetchingNextPage,
+			fetchPreviousPage,
 			isError,
 			error,
 			hasNextPage,
 		},
-		pokemonDetailsQueries,
-	} = type === "all" ? usePokemonQuery() : usePokemonFilterQuery(type);
+	} = usePokemonQuery();
 
 	if (isError) {
 		throw new Error(error.message);
@@ -60,12 +56,28 @@ const Pokedex = () => {
 			>
 				Búsqueda Pokemon
 			</h1>
-
 			<TypesCarousel setType={setType} />
-
 			<Search bg="bg-secondary-100" />
-
-			{/* Render Pokemon cards */}
+			<button
+				onClick={() => {
+					fetchNextPage();
+					setCurrentPage((prev) => prev + 1);
+				}}
+				className="text-2xl text-white"
+				type="button"
+			>
+				siguiente
+			</button>
+			<button
+				onClick={() => {
+					fetchPreviousPage();
+					setCurrentPage((prev) => (prev > 0 ? prev - 1 : prev));
+				}}
+				className="text-2xl text-white"
+				type="button"
+			>
+				Anterior
+			</button>
 			<section
 				ref={sectionRef}
 				className={tvFlexContainer({
@@ -77,27 +89,15 @@ const Pokedex = () => {
 					class: "flex-wrap gap-5 p-9 max-w-[1430px] relative ",
 				})}
 			>
-				{pokemonDetailsQueries.map(
+				{/* {pokemonDetailsQueries.map(
 					(query) =>
 						query.isSuccess && (
 							<PokemonCard key={query.data.id} pokemon={query.data} />
 						),
-				)}
+				)} */}
 				<ScrollUpButton scrollUp={handleScrollToSection} />
 			</section>
-
-			{hasNextPage && (
-				<Button
-					onClick={() => fetchNextPage()}
-					textColor="white"
-					bg="bg-secondary-100"
-					colorBorder="white"
-					padding="default"
-					isDisabled={isFetchingNextPage}
-				>
-					{isFetchingNextPage ? "Cargando..." : "Cargar más"}
-				</Button>
-			)}
+			;
 		</div>
 	);
 };

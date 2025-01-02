@@ -1,21 +1,18 @@
-import type { AllPokemonData, PokemonType } from "@/types/pokemonFetch";
-import {
-	FirstPageURL,
-	getAllPokemon,
-	getFilterPokemon,
-	getPokemonDetails,
-} from "@api/pokemonAPI";
+import type { AllPokemonData } from "@/types/pokemonFetch";
+import { getAllPokemon, getPokemonDetails } from "@api/pokemonAPI";
 import { useInfiniteQuery, useQueries } from "@tanstack/react-query";
 
 export const usePokemonQuery = () => {
 	const pokemonQuery = useInfiniteQuery<AllPokemonData>({
 		queryKey: ["pokemonCursor"],
-		queryFn: ({ pageParam = FirstPageURL }) =>
-			getAllPokemon(pageParam as string),
+		queryFn: ({ pageParam = 0 }) => getAllPokemon(pageParam as number),
 		retry: 0,
-		initialPageParam: FirstPageURL,
+		initialPageParam: 0,
 		getNextPageParam: (lastPage) => {
-			return lastPage.next || undefined;
+			return lastPage.page + 1;
+		},
+		getPreviousPageParam: (firstPage) => {
+			return firstPage.page > 0 ? firstPage.page - 1 : undefined;
 		},
 		/* evitamos que vuelvan a pedirse a la api */
 		gcTime: Number.POSITIVE_INFINITY,
@@ -36,10 +33,10 @@ export const usePokemonQuery = () => {
 			: [],
 	});
 
-	return { pokemonQuery, pokemonDetailsQueries };
+	return { pokemonQuery };
 };
 
-export const usePokemonFilterQuery = (type = "fire") => {
+/* export const usePokemonFilterQuery = (type = "fire") => {
 	const pokemonQuery = useInfiniteQuery({
 		queryKey: ["pokemonCursor", type],
 		queryFn: ({ pageParam = type }) => getFilterPokemon(pageParam as string),
@@ -68,3 +65,4 @@ export const usePokemonFilterQuery = (type = "fire") => {
 
 	return { pokemonDetailsQueries, pokemonQuery };
 };
+ */
