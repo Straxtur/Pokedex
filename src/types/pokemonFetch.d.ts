@@ -1,3 +1,5 @@
+import type { Types } from "./pokemonTypes";
+
 export interface AllPokemonData {
 	count: number;
 	next: string | null;
@@ -14,4 +16,11 @@ interface PokemonPagination {
 export interface PokemonType {
 	pokemon: PokemonPagination;
 	slot: number;
+}
+
+export interface PokemonLocalData {
+	id: number;
+	name: string;
+	sprites: string;
+	types: Types[];
 }

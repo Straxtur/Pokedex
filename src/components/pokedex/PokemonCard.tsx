@@ -1,4 +1,4 @@
-import type { PokemonResponse } from "@/types/pokemonDetails";
+import type { PokemonLocalData } from "@/types/pokemonFetch";
 import { formatPokemonId } from "@/utils/formatter";
 import PokemonType from "@components/PokemonType";
 import {
@@ -9,7 +9,7 @@ import { tvText } from "@styles/variants/text";
 import { m } from "motion/react";
 
 interface PokemonCardProps {
-	pokemon: PokemonResponse;
+	pokemon: PokemonLocalData;
 }
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
@@ -40,16 +40,13 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
 				height: "fit",
 				class: "gap-4 rounded-3xl",
 			})} ${tvBackgroundPokemon({
-				type: pokemon.types[0].type.name,
+				type: pokemon.types[0],
 			})}`}
 		>
 			<figure className="w-fit">
 				<img
 					className="max-w-64 filter saturate-200"
-					src={
-						pokemon.sprites.other?.["official-artwork"].front_default ??
-						pokemon.sprites.other?.home.front_default
-					}
+					src={pokemon.sprites}
 					alt={pokemon.name}
 				/>
 			</figure>
@@ -76,8 +73,8 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
 					class: "gap-2",
 				})}
 			>
-				<PokemonType type={pokemon.types[0].type.name} />
-				{pokemon.types[1] && <PokemonType type={pokemon.types[1].type.name} />}
+				<PokemonType type={pokemon.types[0]} />
+				{pokemon.types[1] && <PokemonType type={pokemon.types[1]} />}
 			</div>
 			<h5
 				className={tvText({

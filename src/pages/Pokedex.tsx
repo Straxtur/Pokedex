@@ -1,32 +1,62 @@
+import { useCurrentPage } from "@/context/context";
+import { LocalPokemonList } from "@/services/pokemons";
+import type { PokemonLocalData } from "@/types/pokemonFetch";
 import type { Types } from "@/types/pokemonTypes";
 import { usePokemonQuery } from "@api/queries/usePokemonQuery";
 import Search from "@components/Search";
+import PokemonCard from "@components/pokedex/PokemonCard";
 import ScrollUpButton from "@components/pokedex/ScrollUpButton";
 import TypesCarousel from "@components/pokedex/TypesCarousel";
 import { tvFlexContainer } from "@styles/variants/container";
 import { tvText } from "@styles/variants/text";
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 const Pokedex = () => {
 	const [_, setType] = useState<Types>("all");
 	const sectionRef = useRef<HTMLDivElement>(null);
-	const [currentPage, setCurrentPage] = useState(0);
+	const { currentPage, setCurrentPage } = useCurrentPage();
 
 	const {
 		pokemonQuery: {
+			data,
 			fetchNextPage,
-			isFetchingNextPage,
 			fetchPreviousPage,
+			isFetchingNextPage,
+			isFetchingPreviousPage,
 			isError,
 			error,
 			hasNextPage,
+			hasPreviousPage,
 		},
 	} = usePokemonQuery();
+
+	const localData = useMemo(() => {
+		if (data?.pages.find((page) => page.page === currentPage)) {
+			const pokemonPaginated = data.pages.find(
+				(page) => page.page === currentPage,
+			);
+
+			return pokemonPaginated?.results
+				.map((pokemon) => {
+					const localPokemon = LocalPokemonList.find(
+						(localPokemon) => localPokemon.name === pokemon.name,
+					);
+					if (localPokemon) {
+						return {
+							...localPokemon,
+							sprites: localPokemon.sprites.front_default,
+						};
+					}
+					return undefined;
+				})
+				.filter((pokemon) => pokemon !== undefined) as PokemonLocalData[];
+		}
+		return [];
+	}, [data, currentPage]);
 
 	if (isError) {
 		throw new Error(error.message);
 	}
-
 	const handleScrollToSection = () => {
 		sectionRef.current?.scrollIntoView({
 			behavior: "smooth", // Para un scroll suave
@@ -58,26 +88,49 @@ const Pokedex = () => {
 			</h1>
 			<TypesCarousel setType={setType} />
 			<Search bg="bg-secondary-100" />
-			<button
-				onClick={() => {
-					fetchNextPage();
-					setCurrentPage((prev) => prev + 1);
-				}}
-				className="text-2xl text-white"
-				type="button"
+
+			<div
+				className={tvFlexContainer({
+					direction: "row",
+					align: "center",
+					justify: "center",
+					width: "fit",
+					height: "fit",
+					class: "gap-5",
+				})}
 			>
-				siguiente
-			</button>
-			<button
-				onClick={() => {
-					fetchPreviousPage();
-					setCurrentPage((prev) => (prev > 0 ? prev - 1 : prev));
-				}}
-				className="text-2xl text-white"
-				type="button"
-			>
-				Anterior
-			</button>
+				<button
+					disabled={!hasPreviousPage || isFetchingPreviousPage}
+					onClick={async () => {
+						if (data?.pages.find((page) => page.page === currentPage - 1)) {
+							return setCurrentPage((prev) => (prev > 0 ? prev - 1 : prev));
+						}
+						await fetchPreviousPage();
+						setCurrentPage((prev) => (prev > 0 ? prev - 1 : prev));
+					}}
+					className="text-2xl text-white"
+					type="button"
+				>
+					Anterior
+				</button>
+
+				<button
+					disabled={!hasNextPage || isFetchingNextPage}
+					onClick={async () => {
+						if (data?.pages.find((page) => page.page === currentPage + 1)) {
+							setCurrentPage((prev) => prev + 1);
+							return;
+						}
+						await fetchNextPage();
+						setCurrentPage((prev) => prev + 1);
+					}}
+					className="text-2xl text-white"
+					type="button"
+				>
+					siguiente
+				</button>
+			</div>
+
 			<section
 				ref={sectionRef}
 				className={tvFlexContainer({
@@ -89,15 +142,11 @@ const Pokedex = () => {
 					class: "flex-wrap gap-5 p-9 max-w-[1430px] relative ",
 				})}
 			>
-				{/* {pokemonDetailsQueries.map(
-					(query) =>
-						query.isSuccess && (
-							<PokemonCard key={query.data.id} pokemon={query.data} />
-						),
-				)} */}
+				{localData.map((pokemon) => (
+					<PokemonCard key={pokemon.id} pokemon={pokemon} />
+				))}
 				<ScrollUpButton scrollUp={handleScrollToSection} />
 			</section>
-			;
 		</div>
 	);
 };
