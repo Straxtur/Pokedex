@@ -17,13 +17,7 @@ const useLocalData = (
 					const localPokemon = LocalPokemonList.find(
 						(localPokemon) => localPokemon.name === pokemon.name,
 					);
-					if (localPokemon) {
-						return {
-							...localPokemon,
-							sprites: localPokemon.sprites.front_default,
-						};
-					}
-					return undefined;
+					return localPokemon ? localPokemon : undefined;
 				})
 				.filter((pokemon) => pokemon !== undefined) as PokemonLocalData[];
 		}

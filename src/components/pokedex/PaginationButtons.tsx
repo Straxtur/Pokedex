@@ -20,6 +20,7 @@ interface PaginationButtonsProps {
 	hasNextPage: boolean;
 	hasPreviousPage: boolean;
 	pages: AllPokemonData[] | undefined;
+	search: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const PaginationButtons: React.FC<PaginationButtonsProps> = ({
@@ -30,6 +31,7 @@ const PaginationButtons: React.FC<PaginationButtonsProps> = ({
 	hasNextPage,
 	hasPreviousPage,
 	pages,
+	search,
 }) => {
 	const { currentPage, setCurrentPage } = useCurrentPage();
 
@@ -37,8 +39,8 @@ const PaginationButtons: React.FC<PaginationButtonsProps> = ({
 		if (currentPage === 51) return; // fin pagination
 
 		if (pages?.find((page) => page.page === currentPage + 1)) {
-			setCurrentPage((prev) => prev + 1);
-			return;
+			search("");
+			return setCurrentPage((prev) => prev + 1);
 		}
 		await nextPage();
 		setCurrentPage((prev) => prev + 1);
@@ -46,6 +48,7 @@ const PaginationButtons: React.FC<PaginationButtonsProps> = ({
 
 	const handlePrevPage = async () => {
 		if (pages?.find((page) => page.page === currentPage - 1)) {
+			search("");
 			return setCurrentPage((prev) => (prev > 0 ? prev - 1 : prev));
 		}
 		await prevPage();

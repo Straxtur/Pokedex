@@ -4,9 +4,10 @@ import { m } from "motion/react";
 
 interface SearchProps {
 	bg: "bg-secondary-200" | "bg-secondary-100";
+	search: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Search: React.FC<SearchProps> = ({ bg }) => {
+const Search: React.FC<SearchProps> = ({ search, bg }) => {
 	return (
 		<section
 			className={tvFlexContainer({
@@ -42,6 +43,7 @@ const Search: React.FC<SearchProps> = ({ bg }) => {
 				</button>
 
 				<input
+					onChange={(e) => search(e)}
 					type="text"
 					placeholder="Buscar Pokémon"
 					className="w-full p-3 text-lg font-light text-white bg-transparent h-fit focus:outline-none font-pokemon"

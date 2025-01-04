@@ -1,4 +1,5 @@
 import { useCurrentPage } from "@/context/context";
+import { LocalPokemonList } from "@/services/pokemons";
 import type { Types } from "@/types/pokemonTypes";
 import { usePokemonQuery } from "@api/queries/usePokemonQuery";
 import Search from "@components/Search";
@@ -9,12 +10,13 @@ import ScrollUpButton from "@components/pokedex/ScrollUpButton";
 import TypesCarousel from "@components/pokedex/TypesCarousel";
 import { tvFlexContainer } from "@styles/variants/container";
 import { tvText } from "@styles/variants/text";
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 const Pokedex = () => {
 	const [_, setType] = useState<Types>("all");
 	const sectionRef = useRef<HTMLDivElement>(null);
 	const { currentPage } = useCurrentPage();
+	const [pokemonSearch, setPokemonSearch] = useState<string>("");
 
 	const {
 		pokemonQuery: {
@@ -43,6 +45,20 @@ const Pokedex = () => {
 		});
 	};
 
+	const pokemonSearched = useMemo(() => {
+		if (pokemonSearch.trim() !== "") {
+			return LocalPokemonList.filter((poke) => {
+				return poke.name.includes(pokemonSearch.toLowerCase());
+			});
+		}
+		return localData;
+	}, [pokemonSearch, localData]);
+
+	const handleSearchPokemon = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const pokemon = e.target.value;
+		setPokemonSearch(pokemon.toLowerCase());
+	};
+
 	return (
 		<main
 			className={tvFlexContainer({
@@ -69,7 +85,7 @@ const Pokedex = () => {
 
 			<TypesCarousel setType={setType} />
 
-			<Search bg="bg-secondary-100" />
+			<Search search={handleSearchPokemon} bg="bg-secondary-100" />
 
 			<PaginationButtons
 				nextPage={fetchNextPage}
@@ -79,6 +95,7 @@ const Pokedex = () => {
 				hasNextPage={hasNextPage}
 				hasPreviousPage={hasPreviousPage}
 				pages={data?.pages}
+				search={setPokemonSearch}
 			/>
 
 			<section
@@ -91,7 +108,7 @@ const Pokedex = () => {
 					class: "flex-wrap gap-5 p-9 max-w-[1430px] relative ",
 				})}
 			>
-				{localData.map((pokemon) => (
+				{pokemonSearched.map((pokemon) => (
 					<PokemonCard key={pokemon.id} pokemon={pokemon} />
 				))}
 				<ScrollUpButton scrollUp={handleScrollToSection} />
@@ -105,6 +122,7 @@ const Pokedex = () => {
 				hasNextPage={hasNextPage}
 				hasPreviousPage={hasPreviousPage}
 				pages={data?.pages}
+				search={setPokemonSearch}
 			/>
 		</main>
 	);
