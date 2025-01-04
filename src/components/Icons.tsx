@@ -46,6 +46,40 @@ export const ArrowUpIcon = ({
 	);
 };
 
+export const ArrowLeftIcon = ({
+	color,
+	size,
+}: { color: string; size: string }) => {
+	return (
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width={size}
+			height={size}
+			fill={color}
+			viewBox="0 0 256 256"
+		>
+			<path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z" />
+		</svg>
+	);
+};
+
+export const ArrowRightIcon = ({
+	color,
+	size,
+}: { color: string; size: string }) => {
+	return (
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width={size}
+			height={size}
+			fill={color}
+			viewBox="0 0 256 256"
+		>
+			<path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z" />
+		</svg>
+	);
+};
+
 /* 
 !! Types Pokemon Icons
 */

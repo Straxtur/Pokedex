@@ -1,20 +1,20 @@
 import { useCurrentPage } from "@/context/context";
-import { LocalPokemonList } from "@/services/pokemons";
-import type { PokemonLocalData } from "@/types/pokemonFetch";
 import type { Types } from "@/types/pokemonTypes";
 import { usePokemonQuery } from "@api/queries/usePokemonQuery";
 import Search from "@components/Search";
+import useLocalData from "@components/hooks/useLocalData";
+import PaginationButtons from "@components/pokedex/PaginationButtons";
 import PokemonCard from "@components/pokedex/PokemonCard";
 import ScrollUpButton from "@components/pokedex/ScrollUpButton";
 import TypesCarousel from "@components/pokedex/TypesCarousel";
 import { tvFlexContainer } from "@styles/variants/container";
 import { tvText } from "@styles/variants/text";
-import { useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 const Pokedex = () => {
 	const [_, setType] = useState<Types>("all");
 	const sectionRef = useRef<HTMLDivElement>(null);
-	const { currentPage, setCurrentPage } = useCurrentPage();
+	const { currentPage } = useCurrentPage();
 
 	const {
 		pokemonQuery: {
@@ -30,33 +30,12 @@ const Pokedex = () => {
 		},
 	} = usePokemonQuery();
 
-	const localData = useMemo(() => {
-		if (data?.pages.find((page) => page.page === currentPage)) {
-			const pokemonPaginated = data.pages.find(
-				(page) => page.page === currentPage,
-			);
-
-			return pokemonPaginated?.results
-				.map((pokemon) => {
-					const localPokemon = LocalPokemonList.find(
-						(localPokemon) => localPokemon.name === pokemon.name,
-					);
-					if (localPokemon) {
-						return {
-							...localPokemon,
-							sprites: localPokemon.sprites.front_default,
-						};
-					}
-					return undefined;
-				})
-				.filter((pokemon) => pokemon !== undefined) as PokemonLocalData[];
-		}
-		return [];
-	}, [data, currentPage]);
-
 	if (isError) {
 		throw new Error(error.message);
 	}
+
+	const localData = useLocalData(data?.pages, currentPage);
+
 	const handleScrollToSection = () => {
 		sectionRef.current?.scrollIntoView({
 			behavior: "smooth", // Para un scroll suave
@@ -65,7 +44,7 @@ const Pokedex = () => {
 	};
 
 	return (
-		<div
+		<main
 			className={tvFlexContainer({
 				direction: "column",
 				justify: "start",
@@ -76,6 +55,7 @@ const Pokedex = () => {
 			})}
 		>
 			<h1
+				ref={sectionRef}
 				className={tvText({
 					size: "h1",
 					color: "white",
@@ -86,53 +66,22 @@ const Pokedex = () => {
 			>
 				Búsqueda Pokemon
 			</h1>
+
 			<TypesCarousel setType={setType} />
+
 			<Search bg="bg-secondary-100" />
 
-			<div
-				className={tvFlexContainer({
-					direction: "row",
-					align: "center",
-					justify: "center",
-					width: "fit",
-					height: "fit",
-					class: "gap-5",
-				})}
-			>
-				<button
-					disabled={!hasPreviousPage || isFetchingPreviousPage}
-					onClick={async () => {
-						if (data?.pages.find((page) => page.page === currentPage - 1)) {
-							return setCurrentPage((prev) => (prev > 0 ? prev - 1 : prev));
-						}
-						await fetchPreviousPage();
-						setCurrentPage((prev) => (prev > 0 ? prev - 1 : prev));
-					}}
-					className="text-2xl text-white"
-					type="button"
-				>
-					Anterior
-				</button>
-
-				<button
-					disabled={!hasNextPage || isFetchingNextPage}
-					onClick={async () => {
-						if (data?.pages.find((page) => page.page === currentPage + 1)) {
-							setCurrentPage((prev) => prev + 1);
-							return;
-						}
-						await fetchNextPage();
-						setCurrentPage((prev) => prev + 1);
-					}}
-					className="text-2xl text-white"
-					type="button"
-				>
-					siguiente
-				</button>
-			</div>
+			<PaginationButtons
+				nextPage={fetchNextPage}
+				prevPage={fetchPreviousPage}
+				isFetchingNextPage={isFetchingNextPage}
+				isFetchingPreviousPage={isFetchingPreviousPage}
+				hasNextPage={hasNextPage}
+				hasPreviousPage={hasPreviousPage}
+				pages={data?.pages}
+			/>
 
 			<section
-				ref={sectionRef}
 				className={tvFlexContainer({
 					direction: "row",
 					align: "center",
@@ -147,7 +96,17 @@ const Pokedex = () => {
 				))}
 				<ScrollUpButton scrollUp={handleScrollToSection} />
 			</section>
-		</div>
+
+			<PaginationButtons
+				nextPage={fetchNextPage}
+				prevPage={fetchPreviousPage}
+				isFetchingNextPage={isFetchingNextPage}
+				isFetchingPreviousPage={isFetchingPreviousPage}
+				hasNextPage={hasNextPage}
+				hasPreviousPage={hasPreviousPage}
+				pages={data?.pages}
+			/>
+		</main>
 	);
 };
 

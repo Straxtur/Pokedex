@@ -8,6 +8,7 @@ interface ButtonProps {
 	bg?: string;
 	padding?: "none" | "default";
 	isDisabled?: true | false;
+	shapeButton?: string;
 	onClick?: () => void;
 }
 
@@ -19,6 +20,7 @@ const Button: React.FC<ButtonProps> = ({
 	bg = "transparent",
 	padding = "none",
 	isDisabled = false,
+	shapeButton,
 	onClick,
 }) => {
 	return (
@@ -53,7 +55,7 @@ const Button: React.FC<ButtonProps> = ({
 				textColor: textColor,
 				border: colorBorder,
 				padding: padding,
-				class: `${bg}`,
+				class: `${bg} ${shapeButton}`,
 			})}
 			type={type}
 		>
