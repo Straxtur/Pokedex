@@ -1,5 +1,5 @@
 export type Types =
-	| "all"
+	| undefined
 	| "bug"
 	| "dark"
 	| "dragon"

@@ -7,6 +7,7 @@ import type {
 	InfiniteData,
 	InfiniteQueryObserverResult,
 } from "@tanstack/react-query";
+import { useCallback } from "react";
 
 interface PaginationButtonsProps {
 	nextPage: () => Promise<
@@ -35,7 +36,7 @@ const PaginationButtons: React.FC<PaginationButtonsProps> = ({
 }) => {
 	const { currentPage, setCurrentPage } = useCurrentPage();
 
-	const handleNextPage = async () => {
+	const handleNextPage = useCallback(async () => {
 		if (currentPage === 51) return; // fin pagination
 
 		if (pages?.find((page) => page.page === currentPage + 1)) {
@@ -44,16 +45,16 @@ const PaginationButtons: React.FC<PaginationButtonsProps> = ({
 		}
 		await nextPage();
 		setCurrentPage((prev) => prev + 1);
-	};
+	}, [currentPage, nextPage, pages, search, setCurrentPage]);
 
-	const handlePrevPage = async () => {
+	const handlePrevPage = useCallback(async () => {
 		if (pages?.find((page) => page.page === currentPage - 1)) {
 			search("");
 			return setCurrentPage((prev) => (prev > 0 ? prev - 1 : prev));
 		}
 		await prevPage();
 		setCurrentPage((prev) => (prev > 0 ? prev - 1 : prev));
-	};
+	}, [currentPage, pages, prevPage, search, setCurrentPage]);
 
 	return (
 		<div

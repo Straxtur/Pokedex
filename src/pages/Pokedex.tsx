@@ -10,10 +10,12 @@ import ScrollUpButton from "@components/pokedex/ScrollUpButton";
 import TypesCarousel from "@components/pokedex/TypesCarousel";
 import { tvFlexContainer } from "@styles/variants/container";
 import { tvText } from "@styles/variants/text";
+import { matchSorter } from "match-sorter";
 import { useMemo, useRef, useState } from "react";
+import { useDebounceCallback } from "usehooks-ts";
 
 const Pokedex = () => {
-	const [_, setType] = useState<Types>("all");
+	const [_, setType] = useState<Types>(undefined);
 	const sectionRef = useRef<HTMLDivElement>(null);
 	const { currentPage } = useCurrentPage();
 	const [pokemonSearch, setPokemonSearch] = useState<string>("");
@@ -38,6 +40,16 @@ const Pokedex = () => {
 
 	const localData = useLocalData(data?.pages, currentPage);
 
+	const pokemonSearched = useMemo(() => {
+		if (pokemonSearch.trim() !== "") {
+			return matchSorter(LocalPokemonList, pokemonSearch, {
+				keys: ["name"], // Filtrar por el nombre del Pokémon
+				threshold: matchSorter.rankings.CONTAINS, // Nivel de coincidencia
+			});
+		}
+		return localData;
+	}, [pokemonSearch, localData]);
+
 	const handleScrollToSection = () => {
 		sectionRef.current?.scrollIntoView({
 			behavior: "smooth", // Para un scroll suave
@@ -45,19 +57,13 @@ const Pokedex = () => {
 		});
 	};
 
-	const pokemonSearched = useMemo(() => {
-		if (pokemonSearch.trim() !== "") {
-			return LocalPokemonList.filter((poke) => {
-				return poke.name.includes(pokemonSearch.toLowerCase());
-			});
-		}
-		return localData;
-	}, [pokemonSearch, localData]);
-
-	const handleSearchPokemon = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const pokemon = e.target.value;
-		setPokemonSearch(pokemon.toLowerCase());
-	};
+	const handleSearchPokemon = useDebounceCallback(
+		(e: React.ChangeEvent<HTMLInputElement>) => {
+			const pokemon = e.target.value;
+			setPokemonSearch(pokemon.toLowerCase());
+		},
+		500,
+	);
 
 	return (
 		<main
