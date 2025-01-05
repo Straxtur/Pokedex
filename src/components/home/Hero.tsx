@@ -2,8 +2,13 @@ import LinkButton from "@components/LinkButton";
 import { tvFlexContainer } from "@styles/variants/container";
 import { tvText } from "@styles/variants/text";
 import { m } from "motion/react";
+import type React from "react";
 
-const Hero = () => {
+interface HeroProps {
+	headerClass?: string;
+}
+
+const Hero: React.FC<HeroProps> = ({ headerClass }) => {
 	return (
 		<header
 			className={tvFlexContainer({
@@ -12,7 +17,7 @@ const Hero = () => {
 				height: "fit",
 				justify: "center",
 				align: "center",
-				class: "gap-4",
+				class: `gap-4 ${headerClass}`,
 			})}
 		>
 			<m.section

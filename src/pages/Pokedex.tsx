@@ -1,16 +1,16 @@
 import { useCurrentPage } from "@/context/context";
+import useLocalData from "@/hooks/useLocalData";
 import { LocalPokemonList } from "@/services/pokemons";
 import type { Types } from "@/types/pokemonTypes";
+import { searchPokemonByName } from "@/utils/searchPokemon";
 import { usePokemonQuery } from "@api/queries/usePokemonQuery";
 import Search from "@components/Search";
-import useLocalData from "@components/hooks/useLocalData";
 import PaginationButtons from "@components/pokedex/PaginationButtons";
 import PokemonCard from "@components/pokedex/PokemonCard";
 import ScrollUpButton from "@components/pokedex/ScrollUpButton";
 import TypesCarousel from "@components/pokedex/TypesCarousel";
 import { tvFlexContainer } from "@styles/variants/container";
 import { tvText } from "@styles/variants/text";
-import { matchSorter } from "match-sorter";
 import { useMemo, useRef, useState } from "react";
 import { useDebounceCallback } from "usehooks-ts";
 
@@ -42,10 +42,7 @@ const Pokedex = () => {
 
 	const pokemonSearched = useMemo(() => {
 		if (pokemonSearch.trim() !== "") {
-			return matchSorter(LocalPokemonList, pokemonSearch, {
-				keys: ["name"], // Filtrar por el nombre del Pokémon
-				threshold: matchSorter.rankings.CONTAINS, // Nivel de coincidencia
-			});
+			return searchPokemonByName(LocalPokemonList, pokemonSearch);
 		}
 		return localData;
 	}, [pokemonSearch, localData]);

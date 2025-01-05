@@ -21,6 +21,8 @@ export const tvFlexContainer = tv(
 			justify: {
 				start: "justify-start",
 				center: "justify-center",
+				between: "justify-between",
+				evenly: "justify-evenly",
 			},
 			align: {
 				center: "items-center",

@@ -1,8 +1,14 @@
 import { m } from "motion/react";
 
-const FooterWave = () => {
+interface FooterProps {
+	headerClass?: string;
+}
+
+const FooterWave: React.FC<FooterProps> = ({ headerClass }) => {
 	return (
-		<footer className="relative w-full h-full mt-5 overflow-hidden">
+		<footer
+			className={`relative w-full h-[200px] pt-40  overflow-hidden min-h-[100px] ${headerClass}`}
+		>
 			<m.svg
 				initial={{ y: 0 }}
 				animate={{ y: [0, 15, 0] }}

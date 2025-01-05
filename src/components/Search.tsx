@@ -32,7 +32,7 @@ const Search: React.FC<SearchProps> = ({ search, bg }) => {
 					height: "fit",
 					justify: "center",
 					align: "center",
-					class: `gap-3 px-6 w-[755px] min-w-[293px]  rounded-3xl ${bg}`,
+					class: `gap-3 px-6 w-[755px] min-w-[293px] rounded-3xl ${bg}`,
 				})}
 			>
 				<button
