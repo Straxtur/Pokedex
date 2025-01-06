@@ -2,7 +2,8 @@ import { useCurrentPage } from "@/context/context";
 import useLocalData from "@/hooks/useLocalData";
 import { LocalPokemonList } from "@/services/pokemons";
 import type { Types } from "@/types/pokemonTypes";
-import { searchPokemonByName } from "@/utils/searchPokemon";
+import { cleanInput, isEmptyTextInput } from "@/utils/formatter";
+import { searchPokemon } from "@/utils/searchPokemon";
 import { usePokemonQuery } from "@api/queries/usePokemonQuery";
 import Search from "@components/Search";
 import PaginationButtons from "@components/pokedex/PaginationButtons";
@@ -15,7 +16,7 @@ import { useMemo, useRef, useState } from "react";
 import { useDebounceCallback } from "usehooks-ts";
 
 const Pokedex = () => {
-	const [_, setType] = useState<Types>(undefined);
+	const [pokemonType, setPokemonType] = useState<Types>(undefined);
 	const sectionRef = useRef<HTMLDivElement>(null);
 	const { currentPage } = useCurrentPage();
 	const [pokemonSearch, setPokemonSearch] = useState<string>("");
@@ -41,11 +42,11 @@ const Pokedex = () => {
 	const localData = useLocalData(data?.pages, currentPage);
 
 	const pokemonSearched = useMemo(() => {
-		if (pokemonSearch.trim() !== "") {
-			return searchPokemonByName(LocalPokemonList, pokemonSearch);
+		if (!isEmptyTextInput(pokemonSearch) || pokemonType) {
+			return searchPokemon(LocalPokemonList, pokemonSearch, pokemonType);
 		}
 		return localData;
-	}, [pokemonSearch, localData]);
+	}, [pokemonSearch, localData, pokemonType]);
 
 	const handleScrollToSection = () => {
 		sectionRef.current?.scrollIntoView({
@@ -57,7 +58,8 @@ const Pokedex = () => {
 	const handleSearchPokemon = useDebounceCallback(
 		(e: React.ChangeEvent<HTMLInputElement>) => {
 			const pokemon = e.target.value;
-			setPokemonSearch(pokemon.toLowerCase());
+
+			setPokemonSearch(cleanInput(pokemon).toLowerCase());
 		},
 		500,
 	);
@@ -86,7 +88,7 @@ const Pokedex = () => {
 				Búsqueda Pokemon
 			</h1>
 
-			<TypesCarousel setType={setType} />
+			<TypesCarousel setType={setPokemonType} />
 
 			<Search search={handleSearchPokemon} bg="bg-secondary-100" />
 

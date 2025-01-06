@@ -1,5 +1,6 @@
 import { LocalPokemonList } from "@/services/pokemons";
-import { searchPokemonByName } from "@/utils/searchPokemon";
+import { cleanInput, isEmptyTextInput } from "@/utils/formatter";
+import { searchPokemon } from "@/utils/searchPokemon";
 import Search from "@components/Search";
 import FooterWave from "@components/home/FooterWave";
 import Hero from "@components/home/Hero";
@@ -15,14 +16,15 @@ const Home = () => {
 	const handleSearchPokemon = useDebounceCallback(
 		(e: React.ChangeEvent<HTMLInputElement>) => {
 			const pokemon = e.target.value;
-			setPokemonSearch(pokemon.toLowerCase());
+
+			setPokemonSearch(cleanInput(pokemon).toLowerCase());
 		},
 		500,
 	);
 
 	const pokemonSearched = useMemo(() => {
-		if (pokemonSearch.trim() !== "") {
-			return searchPokemonByName(LocalPokemonList, pokemonSearch);
+		if (!isEmptyTextInput(pokemonSearch)) {
+			return searchPokemon(LocalPokemonList, pokemonSearch);
 		}
 	}, [pokemonSearch]);
 
