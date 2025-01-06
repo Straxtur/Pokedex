@@ -59,7 +59,7 @@ const Home = () => {
 							justify: "start",
 							width: "fill",
 							class:
-								"gap-3 py-2 max-w-[755px]  max-h-[200px] xl:max-h-[300px]  rounded-3xl overflow-y-scroll bg-secondary-200",
+								"gap-3 py-2 max-w-[755px]  max-h-[200px] xl:max-h-[300px] scrollbar  rounded-s-3xl overflow-y-scroll bg-secondary-200",
 						})}
 					>
 						{pokemonSearched?.map((pokemon) => (

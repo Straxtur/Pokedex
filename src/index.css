@@ -16,4 +16,9 @@ body {
     background: linear-gradient(180deg, var(--var-top-gradient) 0%, var(--var-bot-gradient) 90%);
     background-repeat: no-repeat;
     background-size: cover;
+
+   
+    scrollbar-color: #0D9EDF transparent;
+    scrollbar-width: thin;
+   
 }
