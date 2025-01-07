@@ -6,6 +6,7 @@ import {
 	tvFlexContainer,
 } from "@styles/variants/container";
 import { tvText } from "@styles/variants/text";
+import { useNavigate } from "@tanstack/react-router";
 import { m } from "motion/react";
 
 interface PokemonCardProps {
@@ -13,8 +14,15 @@ interface PokemonCardProps {
 }
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
+	const navigate = useNavigate();
+
+	const handleDetailsPokemon = (name: string) => {
+		navigate({ to: "/pokemon/$name/stats", params: { name: name } });
+	};
+
 	return (
 		<m.div
+			onClick={() => handleDetailsPokemon(pokemon.name)}
 			initial={{ opacity: 0, scale: 0.8 }}
 			whileInView={{ opacity: 1, scale: 1 }}
 			viewport={{ amount: 0.4 }}

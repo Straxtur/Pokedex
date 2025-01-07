@@ -66,7 +66,8 @@ const Home = () => {
 					>
 						{pokemonSearched?.map((pokemon) => (
 							<Link
-								to="/pokemon"
+								params={{ name: pokemon.name }}
+								to="/pokemon/$name/stats"
 								className={tvFlexContainer({
 									direction: "row",
 									align: "center",
