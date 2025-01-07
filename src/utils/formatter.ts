@@ -4,7 +4,8 @@
  * @returns El ID formateado
  */
 
-export const formatPokemonId = (id: number): string => {
+export const formatPokemonId = (id: number | undefined): string => {
+	if (!id) return "Sin ID";
 	return `#${id.toString().padStart(3, "0")}`;
 };
 
@@ -33,3 +34,36 @@ export const cleanInput = (text: string): string => {
 	// Evitar múltiples espacios consecutivos
 	return newText.replace(/^\s+/, "");
 };
+
+/**
+ * Convierte una altura en centímetros a metros y la formatea como una cadena.
+ * @param altura - La altura en centímetros.
+ * @returns La altura en metros, formateada como una cadena con dos decimales y la unidad "m".
+ * @throws Error si la altura es negativa.
+ */
+export function alturaEnMetros(altura: number) {
+	if (altura < 0) {
+		throw new Error("Por favor, proporciona una altura válida en centímetros.");
+	}
+	return `${(altura / 10).toFixed(2)} m`;
+}
+
+/**
+ * Convierte un peso en hectogramos a kilogramos y lo formatea como una cadena.
+ * @param peso - El peso en hectogramos.
+ * @returns El peso en kilogramos, formateado como una cadena con dos decimales y la unidad "kg".
+ * @throws Error si el peso es negativo.
+ */
+export function pesoEnKilos(peso: number) {
+	if (peso < 0) {
+		throw new Error("Por favor, proporciona una altura válida en centímetros.");
+	}
+	return `${(peso / 10).toFixed(2)} kg`;
+}
+
+export function capitalizeFirstLetter(string: string) {
+	return string
+		.split(" ")
+		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+		.join(" ");
+}

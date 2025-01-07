@@ -1,4 +1,4 @@
-import Index from "@components/pokemon/Index";
+import Index from "@pages/pokemon/Index";
 import { Link, createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/pokemon/$name/stats")({

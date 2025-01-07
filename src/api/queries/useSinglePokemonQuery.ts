@@ -1,3 +1,4 @@
+import type { PokemonResponse } from "@/types/pokemonDetails";
 import { getPokemonDetails } from "@api/pokemonAPI";
 import { useQuery } from "@tanstack/react-query";
 
@@ -8,7 +9,7 @@ interface UseSinglePokemonQueryProps {
 export const useSinglePokemonQuery = ({
 	pokeName,
 }: UseSinglePokemonQueryProps) => {
-	const pokemonQuery = useQuery({
+	const pokemonQuery = useQuery<PokemonResponse>({
 		queryKey: ["pokemon", pokeName],
 		queryFn: () => getPokemonDetails(pokeName),
 		gcTime: Number.POSITIVE_INFINITY,
