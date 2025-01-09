@@ -9,15 +9,24 @@ import PokemonEvolution from "@components/pokemon/EvolutionLine";
 import PokemonSplash from "@components/pokemon/PokemonSplash";
 import { tvFlexContainer } from "@styles/variants/container";
 import { tvText } from "@styles/variants/text";
-import { useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
 interface props {
 	children: ReactNode;
 	pokeName: string;
+	statsRoute?: string | undefined;
+	movesRoute?: string | undefined;
+	weaknessesRoute?: string | undefined;
 }
 
-const Index: React.FC<props> = ({ children, pokeName }) => {
+const Index: React.FC<props> = ({
+	children,
+	pokeName,
+	statsRoute,
+	movesRoute,
+	weaknessesRoute,
+}) => {
 	const {
 		pokemonQuery: { data: pokemon, error, isSuccess, isLoading },
 	} = useSinglePokemonQuery({ pokeName });
@@ -77,6 +86,7 @@ const Index: React.FC<props> = ({ children, pokeName }) => {
 						<Abilities pokemon={pokemon} />
 					</div>
 
+					{/* evolution line */}
 					<div
 						className={tvFlexContainer({
 							direction: "column",
@@ -117,6 +127,46 @@ const Index: React.FC<props> = ({ children, pokeName }) => {
 						</div>
 					</div>
 
+					{pokemon && (
+						<div
+							className={`${tvFlexContainer({
+								direction: "row",
+								align: "center",
+								justify: "center",
+								width: "fit",
+								height: "fit",
+								class: "gap-7 py-4",
+							})} ${tvText({
+								color: "white",
+								weight: "bold",
+								size: "bigText",
+							})}`}
+						>
+							<Link
+								params={{ name: pokemon?.name }}
+								to="/pokemon/$name/stats"
+								className={statsRoute ? "text-[#0D9EDF]" : ""}
+							>
+								Stats
+							</Link>
+							<span>|</span>
+							<Link
+								params={{ name: pokemon?.name }}
+								to="/pokemon/$name/movimientos"
+								className={movesRoute ? "text-[#0D9EDF]" : ""}
+							>
+								Attacks
+							</Link>
+							<span>|</span>
+							<Link
+								params={{ name: pokemon?.name }}
+								to="/pokemon/$name/debilidades"
+								className={weaknessesRoute ? "text-[#0D9EDF]" : ""}
+							>
+								weaknesses
+							</Link>
+						</div>
+					)}
 					<div>{children}</div>
 				</section>
 			)}
