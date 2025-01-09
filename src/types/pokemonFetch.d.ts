@@ -1,3 +1,4 @@
+import type { EvolutionDetail } from "./pokemonEvolutionLine";
 import type { Types } from "./pokemonTypes";
 
 export interface AllPokemonData {
@@ -23,4 +24,11 @@ export interface PokemonLocalData {
 	name: string;
 	sprites: string;
 	types: Types[];
+}
+
+export interface EvolutionLine {
+	name: string;
+	image: string | undefined;
+	evolution_details: EvolutionDetail[];
+	evolves_to: Chain[];
 }

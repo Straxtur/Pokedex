@@ -1,19 +1,16 @@
+import { useRenderEvolutionLine } from "@/hooks/useRenderEvolutionLine";
 import {
-	alturaEnMetros,
-	formatPokemonId,
-	pesoEnKilos,
-} from "@/utils/formatter";
-import { useSinglePokemonQuery } from "@api/queries/useSinglePokemonQuery";
-import { BasicContainer } from "@components/Containers";
-import { RulerIcon, WeightIcon } from "@components/Icons";
-import PokemonType from "@components/PokemonType";
-import {
-	tvBackgroundPokemon,
-	tvFlexContainer,
-} from "@styles/variants/container";
+	usePokemonLineEvolution,
+	useSinglePokemonQuery,
+} from "@api/queries/useSinglePokemonQuery";
+import Abilities from "@components/pokemon/Abilities";
+import Details from "@components/pokemon/Details";
+import PokemonEvolution from "@components/pokemon/EvolutionLine";
+import PokemonSplash from "@components/pokemon/PokemonSplash";
+import { tvFlexContainer } from "@styles/variants/container";
 import { tvText } from "@styles/variants/text";
+import { useNavigate } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import RenderAbility from "../../components/pokemon/RenderAbility";
 
 interface props {
 	children: ReactNode;
@@ -25,13 +22,18 @@ const Index: React.FC<props> = ({ children, pokeName }) => {
 		pokemonQuery: { data: pokemon, error, isSuccess, isLoading },
 	} = useSinglePokemonQuery({ pokeName });
 
-	if (error) {
-		console.error(error.message);
+	const { evolutionQuery } = usePokemonLineEvolution(pokeName);
+
+	if (error || evolutionQuery.error) {
+		console.error(error?.message);
+		console.error(evolutionQuery.error?.message);
 	}
 
 	if (isSuccess) {
 		console.log(pokemon);
 	}
+
+	const navigate = useNavigate();
 
 	return (
 		<div
@@ -56,34 +58,8 @@ const Index: React.FC<props> = ({ children, pokeName }) => {
 					})}
 				>
 					{/* image + name */}
-					<figure
-						className={`${tvFlexContainer({
-							direction: "column",
-							align: "center",
-							justify: "center",
-							width: "fill",
-							height: "fit",
-							class: "rounded-t-xl",
-						})} ${tvBackgroundPokemon({
-							type: pokemon?.types[0].type.name,
-						})}`}
-					>
-						<h1
-							className={tvText({
-								color: "white",
-								weight: "normal",
-								class: "uppercase text-xl self-start md:self-center pl-2 pt-2",
-							})}
-						>
-							{pokemon?.name} ({formatPokemonId(pokemon?.id)})
-						</h1>
 
-						<img
-							className="max-w-64 filter saturate-200"
-							src={pokemon?.sprites.other?.["official-artwork"].front_default}
-							alt={pokemon?.name}
-						/>
-					</figure>
+					<PokemonSplash pokemon={pokemon} />
 
 					{/* details + skills container */}
 					<div
@@ -95,55 +71,50 @@ const Index: React.FC<props> = ({ children, pokeName }) => {
 						})}
 					>
 						{/* Basic Details */}
-						<section
-							className={tvFlexContainer({
-								direction: "column",
-								align: "center",
-								justify: "start",
-								width: "fill",
-								height: "fit",
-								class: "gap-3 my-3",
-							})}
-						>
-							<BasicContainer bg="bg-secondary-100">
-								<PokemonType type={pokemon?.types[0].type.name} />
-								{pokemon?.types[1] && (
-									<PokemonType type={pokemon?.types[1].type.name} />
-								)}
-							</BasicContainer>
-
-							<BasicContainer bg="bg-secondary-100">
-								<RulerIcon color="white" size="32" />{" "}
-								<p>{alturaEnMetros(pokemon?.height ?? 0)}</p>
-							</BasicContainer>
-
-							<BasicContainer bg="bg-secondary-100">
-								<WeightIcon color="white" size="32" />
-								<p>{pesoEnKilos(pokemon?.weight ?? 0)}</p>
-							</BasicContainer>
-						</section>
+						<Details pokemon={pokemon} />
 
 						{/* skills */}
-						<section
-							className={tvFlexContainer({
-								direction: "column",
-								align: "start",
-								justify: "center",
-								width: "fill",
-								class: "p-5 gap-3 bg-secondary-100 lg:my-3 rounded-xl",
+						<Abilities pokemon={pokemon} />
+					</div>
+
+					<div
+						className={tvFlexContainer({
+							direction: "column",
+							width: "fill",
+							height: "fit",
+							class: "lg:gap-3 bg-secondary-100 mt-4 rounded-xl",
+						})}
+					>
+						<h1
+							className={tvText({
+								color: "white",
+								weight: "bold",
+								class: "text-xl self-start pl-2 pt-2",
 							})}
 						>
-							<h2
-								className={tvText({
-									color: "white",
-									size: "bigText",
-									weight: "bold",
-								})}
-							>
-								Abilities
-							</h2>
-							<RenderAbility ability={pokemon?.abilities} />
-						</section>
+							Evolution Line
+						</h1>
+
+						<div
+							className={tvFlexContainer({
+								direction: "row",
+								align: "center",
+								justify: "center",
+								width: "fill",
+								height: "fit",
+								class: "flex-wrap p-5",
+							})}
+						>
+							{!evolutionQuery.isLoading &&
+								evolutionQuery.data &&
+								useRenderEvolutionLine(evolutionQuery.data).map((evolution) => (
+									<PokemonEvolution
+										key={evolution.name}
+										evolution={evolution}
+										navigate={navigate}
+									/>
+								))}
+						</div>
 					</div>
 
 					<div>{children}</div>

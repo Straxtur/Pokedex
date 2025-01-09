@@ -18,3 +18,21 @@ export const getPokemonDetails = async (pokeName: string) => {
 	}
 	return response.json();
 };
+
+export const getPokemonSpecie = async (pokeName: string) => {
+	const response = await fetch(
+		`https://pokeapi.co/api/v2/pokemon-species/${pokeName}`,
+	);
+	if (!response.ok) {
+		throw new Error("Error durante la petición");
+	}
+	return response.json();
+};
+
+export const getPokemonEvolutionLine = async (url: string | undefined) => {
+	const response = await fetch(`${url}`);
+	if (!response.ok) {
+		throw new Error("Error durante la petición");
+	}
+	return response.json();
+};

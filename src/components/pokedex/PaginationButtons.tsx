@@ -1,7 +1,7 @@
 import { useCurrentPage } from "@/context/context";
 import type { AllPokemonData } from "@/types/pokemonFetch";
 import Button from "@components/Button";
-import { ArrowLeftIcon, ArrowRightIcon } from "@components/Icons";
+import { CaretLeftIcon, CaretRightIcon } from "@components/Icons";
 import { tvFlexContainer } from "@styles/variants/container";
 import type {
 	InfiniteData,
@@ -77,7 +77,7 @@ const PaginationButtons: React.FC<PaginationButtonsProps> = ({
 						padding="none"
 						shapeButton="border-2 border-white rounded-e-sm"
 					>
-						<ArrowLeftIcon color="white" size="30" />
+						<CaretLeftIcon color="white" size="30" />
 					</Button>
 
 					<span className="text-white">{currentPage} / 51</span>
@@ -92,7 +92,7 @@ const PaginationButtons: React.FC<PaginationButtonsProps> = ({
 						padding="none"
 						shapeButton="border-2 border-white rounded-s-sm"
 					>
-						<ArrowRightIcon color="white" size="30" />
+						<CaretRightIcon color="white" size="30" />
 					</Button>
 				</>
 			)}

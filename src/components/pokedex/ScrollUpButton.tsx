@@ -1,5 +1,5 @@
 import Button from "@components/Button";
-import { ArrowUpIcon } from "@components/Icons";
+import { CaretUpIcon } from "@components/Icons";
 
 interface ScrollUpProps {
 	scrollUp: () => void;
@@ -17,7 +17,7 @@ const ScrollUpButton: React.FC<ScrollUpProps> = ({ scrollUp }) => {
 				textColor="white"
 				bg="bg-[#0D9EDF]"
 			>
-				<ArrowUpIcon color="white" size="40" />
+				<CaretUpIcon color="white" size="40" />
 			</Button>
 		</div>
 	);
