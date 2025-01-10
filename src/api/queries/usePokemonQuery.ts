@@ -1,4 +1,4 @@
-import { useCurrentPage } from "@/context/context";
+import { useCurrentPage } from "@/context/PageContext";
 import type { AllPokemonData } from "@/types/pokemonFetch";
 import { getAllPokemon } from "@api/pokemonAPI";
 import { useInfiniteQuery } from "@tanstack/react-query";

@@ -1,4 +1,4 @@
-import { useCurrentPage } from "@/context/context";
+import { useCurrentPage } from "@/context/PageContext";
 import type { AllPokemonData } from "@/types/pokemonFetch";
 import Button from "@components/Button";
 import { CaretLeftIcon, CaretRightIcon } from "@components/Icons";

@@ -1,4 +1,4 @@
-import { useCurrentPage } from "@/context/context";
+import { useCurrentPage } from "@/context/PageContext";
 import useLocalData from "@/hooks/useLocalData";
 import { LocalPokemonList } from "@/services/pokemons";
 import type { Types } from "@/types/pokemonTypes";

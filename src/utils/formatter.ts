@@ -67,3 +67,12 @@ export function capitalizeFirstLetter(string: string) {
 		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
 		.join(" ");
 }
+
+/**
+ * Calcula el porcentaje de una estadística basada en un valor máximo de 255.
+ * @param stat - El valor de la estadística.
+ * @returns El porcentaje de la estadística, redondeado hacia abajo al número entero más cercano.
+ */
+export function calculationOfStats(stat: number) {
+	return Math.floor((stat / 255) * 100);
+}

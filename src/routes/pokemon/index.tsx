@@ -1,4 +1,4 @@
-import { CurrentPageProvider } from "@/context/context";
+import { CurrentPageProvider } from "@/context/PageContext";
 import Pokedex from "@pages/Pokedex";
 
 import { createFileRoute } from "@tanstack/react-router";
