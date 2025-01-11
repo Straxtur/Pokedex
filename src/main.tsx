@@ -23,7 +23,9 @@ if (rootElement) {
 		<LazyMotion features={domAnimation}>
 			<QueryClientProvider client={queryClient}>
 				<RouterProvider router={router} />
-				<ReactQueryDevtools initialIsOpen={false} />
+				{import.meta.env.MODE === "development" && (
+					<ReactQueryDevtools initialIsOpen={false} />
+				)}
 			</QueryClientProvider>
 		</LazyMotion>,
 	);
