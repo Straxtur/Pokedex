@@ -30,7 +30,7 @@ const Index: React.FC<props> = ({
 	weaknessesRoute,
 }) => {
 	const {
-		pokemonQuery: { data: pokemon, error, isSuccess, isLoading },
+		pokemonQuery: { data: pokemon, error, isLoading },
 	} = useSinglePokemonQuery({ pokeName });
 
 	const { evolutionQuery } = usePokemonLineEvolution(pokeName);
@@ -38,10 +38,6 @@ const Index: React.FC<props> = ({
 	if (error || evolutionQuery.error) {
 		console.error(error?.message);
 		console.error(evolutionQuery.error?.message);
-	}
-
-	if (isSuccess) {
-		console.log(pokemon);
 	}
 
 	const navigate = useNavigate();
