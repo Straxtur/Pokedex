@@ -7,7 +7,7 @@ import {
 import Abilities from "@components/pokemon/Abilities";
 import Details from "@components/pokemon/Details";
 import PokemonEvolution from "@components/pokemon/EvolutionLine";
-import Navbar from "@components/pokemon/NavBar";
+import Navbar from "@components/pokemon/Navbar";
 import PokemonSplash from "@components/pokemon/PokemonSplash";
 import { tvFlexContainer } from "@styles/variants/container";
 import { tvText } from "@styles/variants/text";
