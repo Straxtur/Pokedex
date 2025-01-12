@@ -26,6 +26,7 @@ const Home = () => {
 		if (!isEmptyTextInput(pokemonSearch)) {
 			return searchPokemon(LocalPokemonList, pokemonSearch);
 		}
+		return [];
 	}, [pokemonSearch]);
 
 	return (
@@ -53,7 +54,7 @@ const Home = () => {
 			>
 				<Search search={handleSearchPokemon} bg="bg-secondary-200" />
 
-				{pokemonSearch && (
+				{pokemonSearched?.length > 0 && (
 					<div
 						className={tvFlexContainer({
 							direction: "column",

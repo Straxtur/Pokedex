@@ -46,7 +46,7 @@ const Hero: React.FC<HeroProps> = ({ headerClass }) => {
 						size: "h1",
 					})}
 				>
-					Discover the Pokémon World
+					Discover the Pokemon World
 				</h1>
 
 				<p
@@ -58,7 +58,7 @@ const Hero: React.FC<HeroProps> = ({ headerClass }) => {
 						class: "h-fit",
 					})}
 				>
-					Explore, Battle, and Become a Pokémon Master
+					Explore, Battle, and Become a Pokemon Master
 				</p>
 
 				<nav
@@ -76,7 +76,7 @@ const Hero: React.FC<HeroProps> = ({ headerClass }) => {
 						textColor="white"
 						bg={"bg-secondary-200"}
 					>
-						Pokédex
+						Pokedex
 					</LinkButton>
 
 					<LinkButton
