@@ -92,16 +92,18 @@ const Pokedex = () => {
 
 			<Search search={handleSearchPokemon} bg="bg-secondary-100" />
 
-			<PaginationButtons
-				nextPage={fetchNextPage}
-				prevPage={fetchPreviousPage}
-				isFetchingNextPage={isFetchingNextPage}
-				isFetchingPreviousPage={isFetchingPreviousPage}
-				hasNextPage={hasNextPage}
-				hasPreviousPage={hasPreviousPage}
-				pages={data?.pages}
-				search={setPokemonSearch}
-			/>
+			{!pokemonSearch && !pokemonType && (
+				<PaginationButtons
+					nextPage={fetchNextPage}
+					prevPage={fetchPreviousPage}
+					isFetchingNextPage={isFetchingNextPage}
+					isFetchingPreviousPage={isFetchingPreviousPage}
+					hasNextPage={hasNextPage}
+					hasPreviousPage={hasPreviousPage}
+					pages={data?.pages}
+					search={setPokemonSearch}
+				/>
+			)}
 
 			<section
 				className={tvFlexContainer({
@@ -116,19 +118,24 @@ const Pokedex = () => {
 				{pokemonSearched.map((pokemon) => (
 					<PokemonCard key={pokemon.id} pokemon={pokemon} />
 				))}
-				<ScrollUpButton scrollUp={handleScrollToSection} />
+
+				{pokemonSearched.length > 0 && (
+					<ScrollUpButton scrollUp={handleScrollToSection} />
+				)}
 			</section>
 
-			<PaginationButtons
-				nextPage={fetchNextPage}
-				prevPage={fetchPreviousPage}
-				isFetchingNextPage={isFetchingNextPage}
-				isFetchingPreviousPage={isFetchingPreviousPage}
-				hasNextPage={hasNextPage}
-				hasPreviousPage={hasPreviousPage}
-				pages={data?.pages}
-				search={setPokemonSearch}
-			/>
+			{!pokemonSearch && !pokemonType && (
+				<PaginationButtons
+					nextPage={fetchNextPage}
+					prevPage={fetchPreviousPage}
+					isFetchingNextPage={isFetchingNextPage}
+					isFetchingPreviousPage={isFetchingPreviousPage}
+					hasNextPage={hasNextPage}
+					hasPreviousPage={hasPreviousPage}
+					pages={data?.pages}
+					search={setPokemonSearch}
+				/>
+			)}
 		</main>
 	);
 };
