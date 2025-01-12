@@ -54,7 +54,12 @@ const PokemonEvolution: React.FC<EvolutionLineSplashProps> = ({
 
 					{/* pokemon + name */}
 					<div className="flex flex-col items-center p-5">
-						<img width="50px" src={evolution.image} alt={evolution.name} />
+						<img
+							width="50px"
+							src={evolution.image}
+							alt={evolution.name}
+							draggable="false"
+						/>
 						<span
 							className={tvText({
 								size: "buttonText",

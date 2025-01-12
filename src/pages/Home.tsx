@@ -94,6 +94,7 @@ const Home = () => {
 										className="w-[60px] lg:p-0 filter saturate-200"
 										src={pokemon.sprites}
 										alt={pokemon.name}
+										draggable="false"
 									/>
 								</figure>
 							</Link>

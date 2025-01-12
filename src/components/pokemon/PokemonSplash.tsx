@@ -38,6 +38,7 @@ const PokemonSplash: React.FC<pokemonSplashPops> = ({ pokemon }) => {
 				className="max-w-64 filter saturate-200"
 				src={pokemon?.sprites.other?.["official-artwork"].front_default}
 				alt={pokemon?.name}
+				draggable="false"
 			/>
 		</figure>
 	);

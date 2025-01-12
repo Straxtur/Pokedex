@@ -103,6 +103,7 @@ const Hero: React.FC<HeroProps> = ({ headerClass }) => {
 					className="pt-20 lg:p-0 filter saturate-200 w-80"
 					src="greninja-hero.png"
 					alt="greninja"
+					draggable="false"
 				/>
 			</m.figure>
 		</header>

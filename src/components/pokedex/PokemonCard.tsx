@@ -56,6 +56,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
 					className="max-w-64 filter saturate-200"
 					src={pokemon.sprites}
 					alt={pokemon.name}
+					draggable="false"
 				/>
 			</figure>
 			<p

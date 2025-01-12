@@ -12,7 +12,12 @@ export const useHowToEvolved = (evoDetail: EvolutionDetail) => {
 
 		return (
 			<BasicContainer direction="column" clss="px-5">
-				<img width="30px" src={itemDetail.img} alt={itemDetail.name} />
+				<img
+					width="30px"
+					src={itemDetail.img}
+					alt={itemDetail.name}
+					draggable="false"
+				/>
 				<span
 					className={tvText({
 						size: "bigText",

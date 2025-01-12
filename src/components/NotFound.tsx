@@ -21,6 +21,7 @@ const NotFound: React.FC<{ message: string | undefined }> = ({
 					width="100px"
 					src="/pikachu_triste.png"
 					alt="Imagen de un Pikachu triste"
+					draggable="false"
 				/>
 			</figure>
 			<h1
