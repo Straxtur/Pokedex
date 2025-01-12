@@ -24,6 +24,7 @@ export const useSinglePokemonQuery = ({
 		queryFn: () => getPokemonDetails(pokeName),
 		gcTime: Number.POSITIVE_INFINITY,
 		staleTime: Number.POSITIVE_INFINITY,
+		retry: 0,
 	});
 
 	return { pokemonQuery };
@@ -36,6 +37,7 @@ export const usePokemonLineEvolution = (pokeName: string) => {
 		queryFn: () => getPokemonSpecie(pokeName),
 		gcTime: Number.POSITIVE_INFINITY,
 		staleTime: Number.POSITIVE_INFINITY,
+		retry: 0,
 	});
 
 	const evolutionQuery = useQuery<PokemonEvolutionLineResponse>({
@@ -47,6 +49,7 @@ export const usePokemonLineEvolution = (pokeName: string) => {
 		gcTime: Number.POSITIVE_INFINITY,
 		staleTime: Number.POSITIVE_INFINITY,
 		enabled: !!speciesQuery.data,
+		retry: 0,
 	});
 
 	return { evolutionQuery };

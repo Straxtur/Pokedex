@@ -4,6 +4,7 @@ import {
 	usePokemonLineEvolution,
 	useSinglePokemonQuery,
 } from "@api/queries/useSinglePokemonQuery";
+import NotFound from "@components/NotFound";
 import Abilities from "@components/pokemon/Abilities";
 import Details from "@components/pokemon/Details";
 import PokemonEvolution from "@components/pokemon/EvolutionLine";
@@ -35,12 +36,14 @@ const Index: React.FC<props> = ({
 
 	const { evolutionQuery } = usePokemonLineEvolution(pokeName);
 
+	const navigate = useNavigate();
+
 	if (error || evolutionQuery.error) {
 		console.error(error?.message);
 		console.error(evolutionQuery.error?.message);
-	}
 
-	const navigate = useNavigate();
+		return <NotFound message={error?.message} />;
+	}
 
 	return (
 		<PokemonProvider pokemon={pokemon ?? null}>

@@ -11,5 +11,5 @@ export const Route = createRootRoute({
 			</>
 		);
 	},
-	notFoundComponent: NotFound,
+	notFoundComponent: () => <NotFound message="Page not found" />,
 });
