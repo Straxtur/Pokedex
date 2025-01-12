@@ -85,7 +85,7 @@ const Pokedex = () => {
 					leading: "ten",
 				})}
 			>
-				Búsqueda Pokemon
+				Search Pokemon
 			</h1>
 
 			<TypesCarousel setType={setPokemonType} />

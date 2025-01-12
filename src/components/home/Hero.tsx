@@ -46,7 +46,7 @@ const Hero: React.FC<HeroProps> = ({ headerClass }) => {
 						size: "h1",
 					})}
 				>
-					Descubre el mundo Pokemon
+					Discover the Pokémon World
 				</h1>
 
 				<p
@@ -58,7 +58,7 @@ const Hero: React.FC<HeroProps> = ({ headerClass }) => {
 						class: "h-fit",
 					})}
 				>
-					Explora, Combate y conviértete en un maestro Pokemon
+					Explore, Battle, and Become a Pokémon Master
 				</p>
 
 				<nav

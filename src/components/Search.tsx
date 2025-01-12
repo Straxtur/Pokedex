@@ -45,7 +45,7 @@ const Search: React.FC<SearchProps> = ({ search, bg }) => {
 				<input
 					onChange={(e) => search?.(e)}
 					type="text"
-					placeholder="Buscar Pokémon"
+					placeholder="Pikachu"
 					className="w-full p-3 text-lg font-light text-white bg-transparent h-fit focus:outline-none font-pokemon"
 					aria-placeholder="Pikachu"
 				/>
