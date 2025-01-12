@@ -32,28 +32,30 @@ const PokemonEvolution: React.FC<EvolutionLineSplashProps> = ({
 					height: "fit",
 				})}
 			>
-				{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
 				<div
-					onClick={() =>
-						navigate({
-							to: "/pokemon/$name/stats",
-							params: { name: evolution.name },
-						})
-					}
 					className={tvFlexContainer({
 						direction: "row",
 						align: "center",
 						justify: "center",
 						width: "fit",
 						height: "fit",
-						class: "gap-4 hover:cursor-pointer",
+						class: "gap-4",
 					})}
 				>
 					{evolution.evolution_details.length > 0 &&
 						useHowToEvolved(evolution.evolution_details[0])}
 
 					{/* pokemon + name */}
-					<div className="flex flex-col items-center p-5">
+					<button
+						type="button"
+						onClick={() =>
+							navigate({
+								to: "/pokemon/$name/stats",
+								params: { name: evolution.name },
+							})
+						}
+						className="flex flex-col items-center p-5"
+					>
 						<img
 							width="50px"
 							src={evolution.image}
@@ -68,7 +70,7 @@ const PokemonEvolution: React.FC<EvolutionLineSplashProps> = ({
 						>
 							{evolution.name}
 						</span>
-					</div>
+					</button>
 				</div>
 			</div>
 		</div>
