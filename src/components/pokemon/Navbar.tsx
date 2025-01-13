@@ -18,7 +18,7 @@ const Navbar: React.FC<props> = ({
 	return (
 		<div
 			className={`${tvFlexContainer({
-				direction: "row",
+				direction: { initial: "column", sm: "row" },
 				align: "center",
 				justify: "center",
 				width: "fit",
@@ -37,7 +37,7 @@ const Navbar: React.FC<props> = ({
 			>
 				Stats
 			</Link>
-			<span>|</span>
+			<span className="hidden sm:inline">|</span>
 			<Link
 				params={{ name: pokeName }}
 				to="/pokemon/$name/movimientos"
@@ -45,7 +45,7 @@ const Navbar: React.FC<props> = ({
 			>
 				Attacks
 			</Link>
-			<span>|</span>
+			<span className="hidden sm:inline">|</span>
 			<Link
 				params={{ name: pokeName }}
 				to="/pokemon/$name/debilidades"

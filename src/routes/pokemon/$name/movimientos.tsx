@@ -1,5 +1,6 @@
+import Attacks from "@pages/pokemon/Attacks";
 import Index from "@pages/pokemon/Index";
-import { Link, createFileRoute, useMatch } from "@tanstack/react-router";
+import { createFileRoute, useMatch } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/pokemon/$name/movimientos")({
 	component: RouteComponent,
@@ -11,15 +12,7 @@ function RouteComponent() {
 
 	return (
 		<Index pokeName={name} movesRoute={movesRoute.id}>
-			<div>soy los movs</div>
-			<br />
-			<Link params={{ name: name }} to="/pokemon/$name/stats">
-				stats
-			</Link>
-			<br />
-			<Link params={{ name: name }} to="/pokemon/$name/debilidades">
-				debilidades
-			</Link>
+			<Attacks />
 		</Index>
 	);
 }

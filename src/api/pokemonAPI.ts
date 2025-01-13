@@ -29,7 +29,7 @@ export const getPokemonSpecie = async (pokeName: string) => {
 	return response.json();
 };
 
-export const getPokemonEvolutionLine = async (url: string | undefined) => {
+export const getPokemonElementByURL = async (url: string | undefined) => {
 	const response = await fetch(`${url}`);
 	if (!response.ok) {
 		throw new Error("Error durante la petición");

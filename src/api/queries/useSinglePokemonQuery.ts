@@ -2,7 +2,7 @@ import type { PokemonResponse } from "@/types/pokemonDetails";
 import type { PokemonEvolutionLineResponse } from "@/types/pokemonEvolutionLine";
 import {
 	getPokemonDetails,
-	getPokemonEvolutionLine,
+	getPokemonElementByURL,
 	getPokemonSpecie,
 } from "@api/pokemonAPI";
 import { useQuery } from "@tanstack/react-query";
@@ -44,7 +44,7 @@ export const usePokemonLineEvolution = (pokeName: string) => {
 		queryKey: ["evolutionLine", pokeName],
 		queryFn: () =>
 			speciesQuery.data?.evolution_chain.url
-				? getPokemonEvolutionLine(speciesQuery.data.evolution_chain.url)
+				? getPokemonElementByURL(speciesQuery.data.evolution_chain.url)
 				: Promise.reject(new Error("Missing evolution_chain URL")),
 		gcTime: Number.POSITIVE_INFINITY,
 		staleTime: Number.POSITIVE_INFINITY,
