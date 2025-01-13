@@ -12,7 +12,7 @@ const Weaknesses = () => {
 				class: " rounded-2xl bg-secondary-100 p-2 gap-4 overflow-x-hidden",
 			})}
 		>
-			d
+			Weaknesses
 		</section>
 	);
 };

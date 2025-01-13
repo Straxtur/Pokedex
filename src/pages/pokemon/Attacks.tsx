@@ -11,7 +11,7 @@ const Attacks = () => {
 
 	const { pokemonMoves } = usePokemonAttacks(pokemon?.moves ?? []);
 
-	if (pokemonMoves.some((err) => err.data)) {
+	if (pokemonMoves.some((err) => err.error)) {
 		console.error("error al obtener todos los movimientos");
 
 		return <NotFound message={"Have occurred a problem with some moves"} />;
