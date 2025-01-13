@@ -1,5 +1,5 @@
 import Index from "@pages/pokemon/Index";
-import Weaknesses from "@pages/pokemon/weaknesses";
+import Weaknesses from "@pages/pokemon/Weaknesses";
 import { createFileRoute, useMatch } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/pokemon/$name/debilidades")({
