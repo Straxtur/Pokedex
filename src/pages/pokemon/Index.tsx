@@ -21,6 +21,7 @@ interface props {
 	statsRoute?: string | undefined;
 	movesRoute?: string | undefined;
 	weaknessesRoute?: string | undefined;
+	strengthsRoute?: string | undefined;
 }
 
 const Index: React.FC<props> = ({
@@ -29,6 +30,7 @@ const Index: React.FC<props> = ({
 	statsRoute,
 	movesRoute,
 	weaknessesRoute,
+	strengthsRoute,
 }) => {
 	const {
 		pokemonQuery: { data: pokemon, error, isLoading },
@@ -54,7 +56,7 @@ const Index: React.FC<props> = ({
 					align: "center",
 					height: "fill",
 					width: "fill",
-					class: "min-h-fit gap-4 p-5 text-white bg-secondary-200 ",
+					class: "min-h-fit gap-4 pt-5 pb-7 text-white bg-secondary-200 ",
 				})}
 			>
 				{!isLoading && (
@@ -135,6 +137,7 @@ const Index: React.FC<props> = ({
 								movesRoute={movesRoute}
 								statsRoute={statsRoute}
 								weaknessesRoute={weaknessesRoute}
+								strengthsRoute={strengthsRoute}
 							/>
 						)}
 						{children}

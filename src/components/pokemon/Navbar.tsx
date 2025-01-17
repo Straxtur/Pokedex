@@ -7,6 +7,7 @@ interface props {
 	statsRoute?: string | undefined;
 	movesRoute?: string | undefined;
 	weaknessesRoute?: string | undefined;
+	strengthsRoute?: string | undefined;
 }
 
 const Navbar: React.FC<props> = ({
@@ -14,6 +15,7 @@ const Navbar: React.FC<props> = ({
 	movesRoute,
 	statsRoute,
 	weaknessesRoute,
+	strengthsRoute,
 }) => {
 	return (
 		<div
@@ -51,7 +53,15 @@ const Navbar: React.FC<props> = ({
 				to="/pokemon/$name/debilidades"
 				className={weaknessesRoute ? "text-[#0D9EDF]" : ""}
 			>
-				weaknesses
+				Weaknesses
+			</Link>
+			<span className="hidden sm:inline">|</span>
+			<Link
+				params={{ name: pokeName }}
+				to="/pokemon/$name/fortalezas"
+				className={strengthsRoute ? "text-[#0D9EDF]" : ""}
+			>
+				Strengths
 			</Link>
 		</div>
 	);

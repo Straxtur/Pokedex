@@ -62,7 +62,10 @@ export const typeVersus: Exclude<Types, undefined>[] = [
 	"fairy",
 ];
 
-export const typeAttack = {
+export const typeAttack: Record<
+	Exclude<Types, undefined>,
+	Partial<Record<Exclude<Types, undefined>, number>>
+> = {
 	normal: {
 		rock: 0.5,
 		ghost: 0,
