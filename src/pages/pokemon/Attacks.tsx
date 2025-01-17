@@ -1,7 +1,7 @@
 import { usePokemon } from "@/context/PokemonDataContext";
 import { capitalizeFirstLetter } from "@/utils/formatter";
 import { usePokemonAttacks } from "@api/queries/usePokemonAttacks";
-import NotFound from "@components/NotFound";
+import ErrorLoadSomeFetch from "@components/ErrorLoadSomeFetch";
 import PokemonType from "@components/PokemonType";
 import { tvFlexContainer } from "@styles/variants/container";
 import { tvText } from "@styles/variants/text";
@@ -14,7 +14,13 @@ const Attacks = () => {
 	if (pokemonMoves.some((err) => err.error)) {
 		console.error("error al obtener todos los movimientos");
 
-		return <NotFound message={"Have occurred a problem with some moves"} />;
+		return (
+			<ErrorLoadSomeFetch
+				message={
+					"Something went wrong while getting the moves, pelase retry later"
+				}
+			/>
+		);
 	}
 
 	if (pokemonMoves.some((query) => query.isLoading)) {
