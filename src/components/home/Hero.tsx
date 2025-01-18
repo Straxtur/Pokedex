@@ -80,7 +80,7 @@ const Hero: React.FC<HeroProps> = ({ headerClass }) => {
 					</LinkButton>
 
 					<LinkButton
-						route="/pokemon/builder"
+						route="/teamBuilder"
 						colorBorder="white"
 						textColor="white"
 					>

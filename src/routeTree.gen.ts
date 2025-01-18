@@ -16,8 +16,8 @@ import { Route as PokemonNameDebilidadesImport } from "./routes/pokemon/$name/de
 import { Route as PokemonNameFortalezasImport } from "./routes/pokemon/$name/fortalezas";
 import { Route as PokemonNameMovimientosImport } from "./routes/pokemon/$name/movimientos";
 import { Route as PokemonNameStatsImport } from "./routes/pokemon/$name/stats";
-import { Route as PokemonBuilderImport } from "./routes/pokemon/builder";
 import { Route as PokemonIndexImport } from "./routes/pokemon/index";
+import { Route as PokemonTeamBuilderImport } from "./routes/teamBuilder";
 
 // Create/Update Routes
 
@@ -33,9 +33,9 @@ const PokemonIndexRoute = PokemonIndexImport.update({
 	getParentRoute: () => rootRoute,
 } as any);
 
-const PokemonBuilderRoute = PokemonBuilderImport.update({
-	id: "/pokemon/builder",
-	path: "/pokemon/builder",
+const PokemonTeamBuilderRoute = PokemonTeamBuilderImport.update({
+	id: "/teamBuilder",
+	path: "/teamBuilder",
 	getParentRoute: () => rootRoute,
 } as any);
 
@@ -74,11 +74,11 @@ declare module "@tanstack/react-router" {
 			preLoaderRoute: typeof IndexImport;
 			parentRoute: typeof rootRoute;
 		};
-		"/pokemon/builder": {
-			id: "/pokemon/builder";
-			path: "/pokemon/builder";
-			fullPath: "/pokemon/builder";
-			preLoaderRoute: typeof PokemonBuilderImport;
+		"/teamBuilder": {
+			id: "/teamBuilder";
+			path: "/teamBuilder";
+			fullPath: "/teamBuilder";
+			preLoaderRoute: typeof PokemonTeamBuilderImport;
 			parentRoute: typeof rootRoute;
 		};
 		"/pokemon/": {
@@ -123,7 +123,7 @@ declare module "@tanstack/react-router" {
 
 export interface FileRoutesByFullPath {
 	"/": typeof IndexRoute;
-	"/pokemon/builder": typeof PokemonBuilderRoute;
+	"/teamBuilder": typeof PokemonTeamBuilderRoute;
 	"/pokemon": typeof PokemonIndexRoute;
 	"/pokemon/$name/debilidades": typeof PokemonNameDebilidadesRoute;
 	"/pokemon/$name/fortalezas": typeof PokemonNameFortalezasRoute;
@@ -133,7 +133,7 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
 	"/": typeof IndexRoute;
-	"/pokemon/builder": typeof PokemonBuilderRoute;
+	"/teamBuilder": typeof PokemonTeamBuilderRoute;
 	"/pokemon": typeof PokemonIndexRoute;
 	"/pokemon/$name/debilidades": typeof PokemonNameDebilidadesRoute;
 	"/pokemon/$name/fortalezas": typeof PokemonNameFortalezasRoute;
@@ -144,7 +144,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
 	__root__: typeof rootRoute;
 	"/": typeof IndexRoute;
-	"/pokemon/builder": typeof PokemonBuilderRoute;
+	"/teamBuilder": typeof PokemonTeamBuilderRoute;
 	"/pokemon/": typeof PokemonIndexRoute;
 	"/pokemon/$name/debilidades": typeof PokemonNameDebilidadesRoute;
 	"/pokemon/$name/fortalezas": typeof PokemonNameFortalezasRoute;
@@ -156,7 +156,7 @@ export interface FileRouteTypes {
 	fileRoutesByFullPath: FileRoutesByFullPath;
 	fullPaths:
 		| "/"
-		| "/pokemon/builder"
+		| "/teamBuilder"
 		| "/pokemon"
 		| "/pokemon/$name/debilidades"
 		| "/pokemon/$name/fortalezas"
@@ -165,7 +165,7 @@ export interface FileRouteTypes {
 	fileRoutesByTo: FileRoutesByTo;
 	to:
 		| "/"
-		| "/pokemon/builder"
+		| "/teamBuilder"
 		| "/pokemon"
 		| "/pokemon/$name/debilidades"
 		| "/pokemon/$name/fortalezas"
@@ -174,7 +174,7 @@ export interface FileRouteTypes {
 	id:
 		| "__root__"
 		| "/"
-		| "/pokemon/builder"
+		| "/teamBuilder"
 		| "/pokemon/"
 		| "/pokemon/$name/debilidades"
 		| "/pokemon/$name/fortalezas"
@@ -185,7 +185,7 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
 	IndexRoute: typeof IndexRoute;
-	PokemonBuilderRoute: typeof PokemonBuilderRoute;
+	PokemonTeamBuilderRoute: typeof PokemonTeamBuilderRoute;
 	PokemonIndexRoute: typeof PokemonIndexRoute;
 	PokemonNameDebilidadesRoute: typeof PokemonNameDebilidadesRoute;
 	PokemonNameFortalezasRoute: typeof PokemonNameFortalezasRoute;
@@ -195,7 +195,7 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
 	IndexRoute: IndexRoute,
-	PokemonBuilderRoute: PokemonBuilderRoute,
+	PokemonTeamBuilderRoute: PokemonTeamBuilderRoute,
 	PokemonIndexRoute: PokemonIndexRoute,
 	PokemonNameDebilidadesRoute: PokemonNameDebilidadesRoute,
 	PokemonNameFortalezasRoute: PokemonNameFortalezasRoute,
