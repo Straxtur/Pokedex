@@ -30,6 +30,8 @@ const TeamBuilder = () => {
 		setShowAnalytics((show) => !show);
 	};
 
+	console.log(pokemonType);
+
 	const pokemonSearched = useMemo(() => {
 		if (!isEmptyTextInput(pokemonSearch) || pokemonType) {
 			return searchPokemon(LocalPokemonList, pokemonSearch, pokemonType);
@@ -93,10 +95,20 @@ const TeamBuilder = () => {
 
 			{/* Biblioteca de pokemons */}
 			<section className="flex flex-col w-full h-full p-4 bg-secondary-100 rounded-xl">
-				<div className="flex flex-col w-full px-2 py-5 h-fit">
-					<FilterType />
+				<div
+					className={tvFlexContainer({
+						direction: { initial: "column", lg: "row" },
+						justify: "center",
+						align: "center",
+						width: "fill",
+						height: "fit",
+						class: "px-2 py-5",
+					})}
+				>
+					<FilterType setType={setPokemonType} />
 					<Search search={handleSearchPokemon} bg="bg-secondary-200" />
 				</div>
+
 				<div
 					className={tvFlexContainer({
 						justify: "center",
