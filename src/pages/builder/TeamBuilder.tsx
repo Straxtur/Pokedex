@@ -1,9 +1,11 @@
 import { LocalPokemonList } from "@/services/pokemons";
+import type { PokemonLocalData } from "@/types/pokemonFetch";
 import type { Types } from "@/types/pokemonTypes";
 import { cleanInput, isEmptyTextInput } from "@/utils/formatter";
 import { searchPokemon } from "@/utils/searchPokemon";
 import Button from "@components/Button";
 import Search from "@components/Search";
+import EmptySlot from "@components/builder/EmptySlot";
 import FilterType from "@components/builder/FilterType";
 import PokemonListCard from "@components/builder/PokemonListCard";
 import PokemonTeamCard from "@components/builder/PokemonTeamCard";
@@ -16,6 +18,7 @@ const TeamBuilder = () => {
 	const [showAnalytics, setShowAnalytics] = useState(false);
 	const [pokemonSearch, setPokemonSearch] = useState<string>("");
 	const [pokemonType, setPokemonType] = useState<Types>(undefined);
+	const [pokemonTeam, setPokemonTeam] = useState<PokemonLocalData[]>([]);
 
 	const handleSearchPokemon = useDebounceCallback(
 		(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +46,7 @@ const TeamBuilder = () => {
 				direction: "column",
 				justify: "start",
 				align: "center",
-				height: "fit",
+				height: "fill",
 				width: "fill",
 				class: "min-h-fit gap-4 text-white bg-secondary-200 py-12 ",
 			})}
@@ -70,12 +73,19 @@ const TeamBuilder = () => {
 					class: "gap-4 flex-wrap px-2",
 				})}
 			>
-				<PokemonTeamCard />
-				<PokemonTeamCard />
-				<PokemonTeamCard />
-				<PokemonTeamCard />
-				<PokemonTeamCard />
-				<PokemonTeamCard />
+				{pokemonTeam.length > 0 ? (
+					<>
+						{pokemonTeam.map((pokemon) => (
+							<PokemonTeamCard
+								key={pokemon.id}
+								pokemon={pokemon}
+								removePokemon={setPokemonTeam}
+							/>
+						))}
+					</>
+				) : (
+					<EmptySlot />
+				)}
 			</main>
 
 			<Button
@@ -110,14 +120,20 @@ const TeamBuilder = () => {
 				<div
 					className={tvFlexContainer({
 						justify: "center",
-						align: "center",
+						align: "start",
 						width: "fill",
 						height: "fill",
-						class: "flex-wrap gap-4 overflow-y-scroll max-h-[400px]",
+						class:
+							"flex-wrap gap-4 overflow-y-scroll max-h-[400px] lg:max-h-[600px] xl:max-h-[800px]",
 					})}
 				>
 					{pokemonSearched.map((pokemon) => (
-						<PokemonListCard key={pokemon.id} pokemon={pokemon} />
+						<PokemonListCard
+							key={pokemon.id}
+							pokemon={pokemon}
+							addPokemon={setPokemonTeam}
+							pokemonTeam={pokemonTeam}
+						/>
 					))}
 				</div>
 			</section>

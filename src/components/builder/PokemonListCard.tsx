@@ -7,13 +7,28 @@ import { useState } from "react";
 
 interface Props {
 	pokemon: PokemonLocalData;
+	pokemonTeam: PokemonLocalData[];
+	addPokemon: React.Dispatch<React.SetStateAction<PokemonLocalData[]>>;
 }
 
-const PokemonListCard: React.FC<Props> = ({ pokemon }) => {
+const PokemonListCard: React.FC<Props> = ({
+	pokemon,
+	pokemonTeam,
+	addPokemon,
+}) => {
 	const [showName, setShowName] = useState(false);
 
+	const handleAddPokemon = (pokemon: PokemonLocalData) => {
+		if (pokemonTeam.find((pok) => pok.id === pokemon.id)) return;
+
+		if (pokemonTeam.length < 6)
+			addPokemon((prevTeam) => [...prevTeam, pokemon]);
+	};
+
 	return (
-		<div
+		<button
+			type="button"
+			onClick={() => handleAddPokemon(pokemon)}
 			onMouseEnter={() => setShowName(true)}
 			onMouseLeave={() => setShowName(false)}
 			id="pokemonCard"
@@ -23,7 +38,7 @@ const PokemonListCard: React.FC<Props> = ({ pokemon }) => {
 				justify: "center",
 				width: "fit",
 				height: "fit",
-				class: "gap-4 rounded-xl relative cursor-pointer", // Aquí agregamos el group al contenedor principal
+				class: "gap-4 rounded-xl relative cursor-pointer",
 			})} ${tvBackgroundPokemon({
 				type: pokemon.types[0],
 			})}`}
@@ -41,7 +56,7 @@ const PokemonListCard: React.FC<Props> = ({ pokemon }) => {
 					draggable="false"
 				/>
 			</figure>
-		</div>
+		</button>
 	);
 };
 

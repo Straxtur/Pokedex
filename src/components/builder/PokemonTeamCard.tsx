@@ -1,3 +1,4 @@
+import type { PokemonLocalData } from "@/types/pokemonFetch";
 import PokemonType from "@components/PokemonType";
 import {
 	tvBackgroundPokemon,
@@ -5,30 +6,41 @@ import {
 } from "@styles/variants/container";
 import { tvText } from "@styles/variants/text";
 
-const PokemonTeamCard = () => {
+interface Props {
+	pokemon: PokemonLocalData;
+	removePokemon: React.Dispatch<React.SetStateAction<PokemonLocalData[]>>;
+}
+
+const PokemonTeamCard: React.FC<Props> = ({ pokemon, removePokemon }) => {
+	const handleRemovePokemon = (pokemon: PokemonLocalData) => {
+		removePokemon((prevTeam) => prevTeam.filter((p) => p.id !== pokemon.id));
+	};
+
 	return (
-		<div
+		<button
+			type="button"
+			onClick={() => handleRemovePokemon(pokemon)}
 			className={`${tvFlexContainer({
 				direction: "column",
 				justify: "start",
 				align: "center",
 				height: "fit",
 				width: "fit",
-				class: "gap-7 pt-4 pb-5 rounded-t-3xl",
+				class: "gap-7 pt-4 pb-5 rounded-t-3xl min-w-[240px]",
 			})} ${tvBackgroundPokemon({
-				type: "water",
+				type: pokemon.types[0],
 			})}`}
 		>
 			<figure
 				className={`bg-red-200 rounded-full p-3 w-fit ${tvBackgroundPokemon({
-					type: "water",
+					type: pokemon.types[0],
 				})}`}
 			>
 				<img
 					className="filter saturate-200"
 					width="120px"
-					src="greninja-hero.png"
-					alt="greninja"
+					src={pokemon.sprites}
+					alt={pokemon.name}
 				/>
 			</figure>
 
@@ -41,14 +53,14 @@ const PokemonTeamCard = () => {
 						class: "text-3xl uppercase",
 					})}
 				>
-					Greninja
+					{pokemon.name}
 				</h3>
 				<div className="flex gap-4 p-2 w-fit h-fit">
-					<PokemonType type="water" />
-					<PokemonType type="dark" />
+					<PokemonType type={pokemon?.types[0]} />
+					{pokemon?.types[1] && <PokemonType type={pokemon?.types[1]} />}
 				</div>
 			</div>
-		</div>
+		</button>
 	);
 };
 
