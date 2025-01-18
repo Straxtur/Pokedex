@@ -30,8 +30,6 @@ const TeamBuilder = () => {
 		setShowAnalytics((show) => !show);
 	};
 
-	console.log(pokemonType);
-
 	const pokemonSearched = useMemo(() => {
 		if (!isEmptyTextInput(pokemonSearch) || pokemonType) {
 			return searchPokemon(LocalPokemonList, pokemonSearch, pokemonType);
