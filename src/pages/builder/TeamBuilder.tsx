@@ -103,7 +103,16 @@ const TeamBuilder = () => {
 			{/* Analytics del equipo */}
 			{showAnalytics && (
 				<section className="flex flex-col items-center justify-center w-full gap-4 rounded-lg l h-fit bg-secondary-100 ">
-					<h2>Defensive Coverage</h2>
+					<h2
+						className={tvText({
+							color: "white",
+							weight: "bold",
+							size: "bigText",
+							class: "py-3",
+						})}
+					>
+						Defensive Coverage
+					</h2>
 
 					<div className="flex w-full overflow-x-scroll lg:overflow-hidden md:justify-center h-fit">
 						<table
@@ -122,6 +131,16 @@ const TeamBuilder = () => {
 
 			{/* Biblioteca de pokemons */}
 			<section className="flex flex-col w-full h-full p-4 bg-secondary-100 rounded-xl min-w-[300px]">
+				<h2
+					className={tvText({
+						color: "white",
+						weight: "bold",
+						size: "bigText",
+						class: "py-3",
+					})}
+				>
+					Pokemon Library
+				</h2>
 				<div
 					className={tvFlexContainer({
 						direction: { initial: "column", lg: "row" },
