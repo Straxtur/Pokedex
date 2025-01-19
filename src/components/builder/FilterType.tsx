@@ -22,7 +22,7 @@ const FilterType: React.FC<Props> = ({ setType }) => {
 		<Select
 			onChange={(e) => handleChangeType(e as SingleValue<typesSelect>)}
 			isSearchable
-			className="w-[300px]"
+			className="w-[250px] sm:w-[300px]"
 			options={pokemonTypesSelect}
 			defaultValue={pokemonTypesSelect[0]}
 			styles={customStyles}

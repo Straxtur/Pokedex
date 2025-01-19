@@ -9,6 +9,8 @@ import EmptySlot from "@components/builder/EmptySlot";
 import FilterType from "@components/builder/FilterType";
 import PokemonListCard from "@components/builder/PokemonListCard";
 import PokemonTeamCard from "@components/builder/PokemonTeamCard";
+import TableColumn from "@components/builder/TableColums";
+import TableRows from "@components/builder/TableRows";
 import { tvFlexContainer } from "@styles/variants/container";
 import { tvText } from "@styles/variants/text";
 import { useMemo, useState } from "react";
@@ -48,7 +50,7 @@ const TeamBuilder = () => {
 				align: "center",
 				height: "fill",
 				width: "fill",
-				class: "min-h-fit gap-4 text-white bg-secondary-200 py-12 ",
+				class: "min-h-fit gap-4 text-white bg-secondary-200 p-4 lg:p-12 ",
 			})}
 		>
 			<h1
@@ -99,10 +101,27 @@ const TeamBuilder = () => {
 			</Button>
 
 			{/* Analytics del equipo */}
-			{showAnalytics && <section>Analytics del equip</section>}
+			{showAnalytics && (
+				<section className="flex flex-col items-center justify-center w-full gap-4 rounded-lg l h-fit bg-secondary-100 ">
+					<h2>Defensive Coverage</h2>
+
+					<div className="flex w-full overflow-x-scroll lg:overflow-hidden md:justify-center h-fit">
+						<table
+							className={tvText({
+								color: "white",
+								class: "border-collapse w-5/6 m-4",
+							})}
+						>
+							<TableColumn pokemonTeam={pokemonTeam} />
+
+							<TableRows pokemonTeam={pokemonTeam} />
+						</table>
+					</div>
+				</section>
+			)}
 
 			{/* Biblioteca de pokemons */}
-			<section className="flex flex-col w-full h-full p-4 bg-secondary-100 rounded-xl">
+			<section className="flex flex-col w-full h-full p-4 bg-secondary-100 rounded-xl min-w-[300px]">
 				<div
 					className={tvFlexContainer({
 						direction: { initial: "column", lg: "row" },
