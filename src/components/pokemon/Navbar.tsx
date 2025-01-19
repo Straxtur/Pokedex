@@ -42,7 +42,7 @@ const Navbar: React.FC<props> = ({
 			<span className="hidden sm:inline">|</span>
 			<Link
 				params={{ name: pokeName }}
-				to="/pokemon/$name/movimientos"
+				to="/pokemon/$name/attacks"
 				className={movesRoute ? "text-[#0D9EDF]" : ""}
 			>
 				Attacks
@@ -50,7 +50,7 @@ const Navbar: React.FC<props> = ({
 			<span className="hidden sm:inline">|</span>
 			<Link
 				params={{ name: pokeName }}
-				to="/pokemon/$name/debilidades"
+				to="/pokemon/$name/weaknesses"
 				className={weaknessesRoute ? "text-[#0D9EDF]" : ""}
 			>
 				Weaknesses
@@ -58,7 +58,7 @@ const Navbar: React.FC<props> = ({
 			<span className="hidden sm:inline">|</span>
 			<Link
 				params={{ name: pokeName }}
-				to="/pokemon/$name/fortalezas"
+				to="/pokemon/$name/strengths"
 				className={strengthsRoute ? "text-[#0D9EDF]" : ""}
 			>
 				Strengths

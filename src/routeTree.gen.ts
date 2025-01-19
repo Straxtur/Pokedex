@@ -12,10 +12,11 @@
 
 import { Route as rootRoute } from "./routes/__root";
 import { Route as IndexImport } from "./routes/index";
-import { Route as PokemonNameDebilidadesImport } from "./routes/pokemon/$name/debilidades";
-import { Route as PokemonNameFortalezasImport } from "./routes/pokemon/$name/fortalezas";
-import { Route as PokemonNameMovimientosImport } from "./routes/pokemon/$name/movimientos";
+import { Route as PokemonNameAttacksImport } from "./routes/pokemon/$name/attacks";
+import { Route as PokemonNameStrengthsImport } from "./routes/pokemon/$name/strengths";
+
 import { Route as PokemonNameStatsImport } from "./routes/pokemon/$name/stats";
+import { Route as PokemonNameWeaknessesImport } from "./routes/pokemon/$name/weaknesses";
 import { Route as PokemonIndexImport } from "./routes/pokemon/index";
 import { Route as PokemonTeamBuilderImport } from "./routes/teamBuilder";
 
@@ -45,21 +46,21 @@ const PokemonNameStatsRoute = PokemonNameStatsImport.update({
 	getParentRoute: () => rootRoute,
 } as any);
 
-const PokemonNameMovimientosRoute = PokemonNameMovimientosImport.update({
-	id: "/pokemon/$name/movimientos",
-	path: "/pokemon/$name/movimientos",
+const PokemonNameAttacksRoute = PokemonNameAttacksImport.update({
+	id: "/pokemon/$name/attacks",
+	path: "/pokemon/$name/attacks",
 	getParentRoute: () => rootRoute,
 } as any);
 
-const PokemonNameDebilidadesRoute = PokemonNameDebilidadesImport.update({
-	id: "/pokemon/$name/debilidades",
-	path: "/pokemon/$name/debilidades",
+const PokemonNameWeaknessesRoute = PokemonNameWeaknessesImport.update({
+	id: "/pokemon/$name/weaknesses",
+	path: "/pokemon/$name/weaknesses",
 	getParentRoute: () => rootRoute,
 } as any);
 
-const PokemonNameFortalezasRoute = PokemonNameFortalezasImport.update({
-	id: "/pokemon/$name/fortalezas",
-	path: "/pokemon/$name/fortalezas",
+const PokemonNameStrengthsRoute = PokemonNameStrengthsImport.update({
+	id: "/pokemon/$name/strengths",
+	path: "/pokemon/$name/strengths",
 	getParentRoute: () => rootRoute,
 } as any);
 
@@ -88,25 +89,25 @@ declare module "@tanstack/react-router" {
 			preLoaderRoute: typeof PokemonIndexImport;
 			parentRoute: typeof rootRoute;
 		};
-		"/pokemon/$name/debilidades": {
-			id: "/pokemon/$name/debilidades";
-			path: "/pokemon/$name/debilidades";
-			fullPath: "/pokemon/$name/debilidades";
-			preLoaderRoute: typeof PokemonNameDebilidadesImport;
+		"/pokemon/$name/weaknesses": {
+			id: "/pokemon/$name/weaknesses";
+			path: "/pokemon/$name/weaknesses";
+			fullPath: "/pokemon/$name/weaknesses";
+			preLoaderRoute: typeof PokemonNameWeaknessesImport;
 			parentRoute: typeof rootRoute;
 		};
-		"/pokemon/$name/fortalezas": {
-			id: "/pokemon/$name/fortalezas";
-			path: "/pokemon/$name/fortalezas";
-			fullPath: "/pokemon/$name/fortalezas";
-			preLoaderRoute: typeof PokemonNameFortalezasImport;
+		"/pokemon/$name/strengths": {
+			id: "/pokemon/$name/strengths";
+			path: "/pokemon/$name/strengths";
+			fullPath: "/pokemon/$name/strengths";
+			preLoaderRoute: typeof PokemonNameStrengthsImport;
 			parentRoute: typeof rootRoute;
 		};
-		"/pokemon/$name/movimientos": {
-			id: "/pokemon/$name/movimientos";
-			path: "/pokemon/$name/movimientos";
-			fullPath: "/pokemon/$name/movimientos";
-			preLoaderRoute: typeof PokemonNameMovimientosImport;
+		"/pokemon/$name/attacks": {
+			id: "/pokemon/$name/attacks";
+			path: "/pokemon/$name/attacks";
+			fullPath: "/pokemon/$name/attacks";
+			preLoaderRoute: typeof PokemonNameAttacksImport;
 			parentRoute: typeof rootRoute;
 		};
 		"/pokemon/$name/stats": {
@@ -125,9 +126,9 @@ export interface FileRoutesByFullPath {
 	"/": typeof IndexRoute;
 	"/teamBuilder": typeof PokemonTeamBuilderRoute;
 	"/pokemon": typeof PokemonIndexRoute;
-	"/pokemon/$name/debilidades": typeof PokemonNameDebilidadesRoute;
-	"/pokemon/$name/fortalezas": typeof PokemonNameFortalezasRoute;
-	"/pokemon/$name/movimientos": typeof PokemonNameMovimientosRoute;
+	"/pokemon/$name/weaknesses": typeof PokemonNameWeaknessesRoute;
+	"/pokemon/$name/strengths": typeof PokemonNameStrengthsRoute;
+	"/pokemon/$name/attacks": typeof PokemonNameAttacksRoute;
 	"/pokemon/$name/stats": typeof PokemonNameStatsRoute;
 }
 
@@ -135,9 +136,9 @@ export interface FileRoutesByTo {
 	"/": typeof IndexRoute;
 	"/teamBuilder": typeof PokemonTeamBuilderRoute;
 	"/pokemon": typeof PokemonIndexRoute;
-	"/pokemon/$name/debilidades": typeof PokemonNameDebilidadesRoute;
-	"/pokemon/$name/fortalezas": typeof PokemonNameFortalezasRoute;
-	"/pokemon/$name/movimientos": typeof PokemonNameMovimientosRoute;
+	"/pokemon/$name/weaknesses": typeof PokemonNameWeaknessesRoute;
+	"/pokemon/$name/strengths": typeof PokemonNameStrengthsRoute;
+	"/pokemon/$name/attacks": typeof PokemonNameAttacksRoute;
 	"/pokemon/$name/stats": typeof PokemonNameStatsRoute;
 }
 
@@ -146,9 +147,9 @@ export interface FileRoutesById {
 	"/": typeof IndexRoute;
 	"/teamBuilder": typeof PokemonTeamBuilderRoute;
 	"/pokemon/": typeof PokemonIndexRoute;
-	"/pokemon/$name/debilidades": typeof PokemonNameDebilidadesRoute;
-	"/pokemon/$name/fortalezas": typeof PokemonNameFortalezasRoute;
-	"/pokemon/$name/movimientos": typeof PokemonNameMovimientosRoute;
+	"/pokemon/$name/weaknesses": typeof PokemonNameWeaknessesRoute;
+	"/pokemon/$name/strengths": typeof PokemonNameStrengthsRoute;
+	"/pokemon/$name/attacks": typeof PokemonNameAttacksRoute;
 	"/pokemon/$name/stats": typeof PokemonNameStatsRoute;
 }
 
@@ -158,27 +159,27 @@ export interface FileRouteTypes {
 		| "/"
 		| "/teamBuilder"
 		| "/pokemon"
-		| "/pokemon/$name/debilidades"
-		| "/pokemon/$name/fortalezas"
-		| "/pokemon/$name/movimientos"
+		| "/pokemon/$name/weaknesses"
+		| "/pokemon/$name/strengths"
+		| "/pokemon/$name/attacks"
 		| "/pokemon/$name/stats";
 	fileRoutesByTo: FileRoutesByTo;
 	to:
 		| "/"
 		| "/teamBuilder"
 		| "/pokemon"
-		| "/pokemon/$name/debilidades"
-		| "/pokemon/$name/fortalezas"
-		| "/pokemon/$name/movimientos"
+		| "/pokemon/$name/weaknesses"
+		| "/pokemon/$name/strengths"
+		| "/pokemon/$name/attacks"
 		| "/pokemon/$name/stats";
 	id:
 		| "__root__"
 		| "/"
 		| "/teamBuilder"
 		| "/pokemon/"
-		| "/pokemon/$name/debilidades"
-		| "/pokemon/$name/fortalezas"
-		| "/pokemon/$name/movimientos"
+		| "/pokemon/$name/weaknesses"
+		| "/pokemon/$name/strengths"
+		| "/pokemon/$name/attacks"
 		| "/pokemon/$name/stats";
 	fileRoutesById: FileRoutesById;
 }
@@ -187,9 +188,9 @@ export interface RootRouteChildren {
 	IndexRoute: typeof IndexRoute;
 	PokemonTeamBuilderRoute: typeof PokemonTeamBuilderRoute;
 	PokemonIndexRoute: typeof PokemonIndexRoute;
-	PokemonNameDebilidadesRoute: typeof PokemonNameDebilidadesRoute;
-	PokemonNameFortalezasRoute: typeof PokemonNameFortalezasRoute;
-	PokemonNameMovimientosRoute: typeof PokemonNameMovimientosRoute;
+	PokemonNameWeaknessesRoute: typeof PokemonNameWeaknessesRoute;
+	PokemonNameStrengthsRoute: typeof PokemonNameStrengthsRoute;
+	PokemonNameAttacksRoute: typeof PokemonNameAttacksRoute;
 	PokemonNameStatsRoute: typeof PokemonNameStatsRoute;
 }
 
@@ -197,9 +198,9 @@ const rootRouteChildren: RootRouteChildren = {
 	IndexRoute: IndexRoute,
 	PokemonTeamBuilderRoute: PokemonTeamBuilderRoute,
 	PokemonIndexRoute: PokemonIndexRoute,
-	PokemonNameDebilidadesRoute: PokemonNameDebilidadesRoute,
-	PokemonNameFortalezasRoute: PokemonNameFortalezasRoute,
-	PokemonNameMovimientosRoute: PokemonNameMovimientosRoute,
+	PokemonNameWeaknessesRoute: PokemonNameWeaknessesRoute,
+	PokemonNameStrengthsRoute: PokemonNameStrengthsRoute,
+	PokemonNameAttacksRoute: PokemonNameAttacksRoute,
 	PokemonNameStatsRoute: PokemonNameStatsRoute,
 };
 
@@ -216,8 +217,8 @@ export const routeTree = rootRoute
         "/",
         "/pokemon/builder",
         "/pokemon/",
-        "/pokemon/$name/debilidades",
-        "/pokemon/$name/movimientos",
+        "/pokemon/$name/weaknesses",
+        "/pokemon/$name/attacks",
         "/pokemon/$name/stats"
       ]
     },
@@ -230,11 +231,11 @@ export const routeTree = rootRoute
     "/pokemon/": {
       "filePath": "pokemon/index.tsx"
     },
-    "/pokemon/$name/debilidades": {
-      "filePath": "pokemon/$name/debilidades.tsx"
+    "/pokemon/$name/weaknesses": {
+      "filePath": "pokemon/$name/weaknesses.tsx"
     },
-    "/pokemon/$name/movimientos": {
-      "filePath": "pokemon/$name/movimientos.tsx"
+    "/pokemon/$name/attacks": {
+      "filePath": "pokemon/$name/attacks.tsx"
     },
     "/pokemon/$name/stats": {
       "filePath": "pokemon/$name/stats.tsx"
