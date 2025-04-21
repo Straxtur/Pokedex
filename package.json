@@ -37,7 +37,7 @@
     "tailwindcss": "^3.4.17",
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.18.1",
-    "vite": "^6.1.1",
+    "vite": "^6.3.2",
     "vite-plugin-env-compatible": "^2.0.1"
   },
   "description": "¡Bienvenido a la Pokédex! Esta aplicación te permite explorar, combatir y convertirte en un maestro Pokémon. Desarrollada con React, TypeScript y Vite, esta aplicación ofrece una experiencia rápida y moderna.",
