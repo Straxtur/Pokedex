@@ -3,6 +3,7 @@ import queryClient from "@api/client";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
+import { Analytics } from "@vercel/analytics/react";
 import { LazyMotion, domAnimation } from "motion/react";
 import { createRoot } from "react-dom/client";
 import { routeTree } from "./routeTree.gen";
@@ -26,6 +27,7 @@ if (rootElement) {
 				{import.meta.env.MODE === "development" && (
 					<ReactQueryDevtools initialIsOpen={false} />
 				)}
+				<Analytics />
 			</QueryClientProvider>
 		</LazyMotion>,
 	);

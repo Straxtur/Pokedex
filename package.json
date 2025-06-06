@@ -12,6 +12,7 @@
   "dependencies": {
     "@tanstack/react-query": "5.62.11",
     "@tanstack/router": "^0.0.1-beta.53",
+    "@vercel/analytics": "^1.5.0",
     "match-sorter": "^8.0.0",
     "motion": "^11.15.0",
     "node-fetch": "^3.3.2",
